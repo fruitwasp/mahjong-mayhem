@@ -9,7 +9,7 @@ import { GamelistComponent } from './gamelist/gamelist.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GamelistComponent
+    GamelistComponent,
   ],
   imports: [
     BrowserModule,
