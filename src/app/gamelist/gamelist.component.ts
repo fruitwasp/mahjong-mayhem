@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Http, Request, RequestMethod } from '@angular/http';
 import 'rxjs/Rx';
 
@@ -14,7 +14,7 @@ export class GamelistComponent implements OnInit {
 
 	url = "http://mahjongmayhem.herokuapp.com/games"
 	games:Observable<Game[]>
-	// Generated stuff.
+
   constructor(private http:Http) { 
   	this.games = http.get(this.url).map(res => res.json())
   }
