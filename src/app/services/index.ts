@@ -1,3 +1,3 @@
 
 export * from './game.service'
-export * from './pagination.service'
+export * from './pager.service'
