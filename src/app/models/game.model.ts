@@ -37,6 +37,6 @@ export class Game {
     }
 
     addPlayers(players: Player[]) {
-        this.players.push(players)
+        this.players = players
     }
 }
