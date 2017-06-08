@@ -45,11 +45,14 @@ export class GameService {
         gameData.minPlayers = gameData.minPlayers || 2
         gameData.maxPlayers = gameData.maxPlayers || 32
 
-        const options = new RequestOptions()
-        options.headers.set('x-username', userName)
-        options.headers.set('x-token', userToken)
+        const options = new RequestOptions({
+            headers: new Headers({
+                "x-username": userName,
+                "x-token": userToken
+            })
+        })
 
-        return this.http.post(config.BASE_URL + 'games', gameData.json(), options)
+        return this.http.post(config.BASE_URL + 'games', gameData, options)
             .map(function(response) {
                 console.log(response.json())
                 return new Game(response.json())

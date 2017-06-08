@@ -31,6 +31,6 @@ export class GamelistComponent implements OnInit {
     }
 
     createGame() {
-        this.gameService.create(config.USER, config.TOKEN, { })
+        this.gameService.create(config.USER, config.TOKEN, {})
     }
 }
