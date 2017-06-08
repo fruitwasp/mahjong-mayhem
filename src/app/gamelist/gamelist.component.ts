@@ -23,32 +23,9 @@ export class GamelistComponent implements OnInit {
     ngOnInit() {
       this.gameService.findPaged("1").subscribe((game) => {})
   	
-      console.log("works")
-  	  console.log(this.games)
   }
 
-  createGame() {
-
-    var game = {
-      "templateName": "Shanghai",
-      "minPlayers": "2",
-      "maxPlayers": "12"
+    createGame() {
+        this.gameService.create(config.USER, config.TOKEN, { })
     }
-
-    var options = new RequestOptions({
-      headers: new Headers ({
-        "x-username": config.USER,
-        "x-token": config.TOKEN
-      })
-    })
-
-    let thing = this.http.post("http://mahjongmayhem.herokuapp.com/games", game, options)
-      .map(res => res.json())
-      .subscribe((game) => {
-           console.log(game)
-      });
-
- 
-  }
-
 }
