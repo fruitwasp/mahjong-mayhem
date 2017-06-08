@@ -29,4 +29,8 @@ export class GamelistComponent implements OnInit {
             this.games = games
         })
     }
+
+    createGame() {
+        this.gameService.create(config.USER, config.TOKEN, {})
+    }
 }

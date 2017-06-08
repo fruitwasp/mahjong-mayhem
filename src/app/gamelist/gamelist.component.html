@@ -1,5 +1,6 @@
 <div class="col s12">
 	<ul class="collection">
+		<button (click)="createGame()">Aanmaken</button>
 		<li class="collection-item" *ngFor="let game of games">
 			<div class="card">
 				<div class="card-content">
@@ -26,7 +27,6 @@
 				<div class="card-action">
 					<a href="#">Join</a>
 				</div>
-				<a (click)="createGame()">Aanmaken</a>
 			</div>
 		</li>
 	</ul>

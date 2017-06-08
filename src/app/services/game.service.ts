@@ -12,18 +12,6 @@ export class GameService {
         private http: Http
     ) { }
 
-    // find(gameId: number): Game[] {
-    //     return this.http.get(config.BASE_URL + 'game/' + gameId).map(function)
-    // }
-
-    // async findPaged() {
-    //     const gamesData = await this.http.get(config.BASE_URL + '/games')
-
-    //     for (let gameData of gamesData) {
-
-    //     }
-    // }
-
     find(gameId: number): Observable<Game> {
         return this.http.get(config.BASE_URL + 'games/' + gameId)
             .map((response) => {
@@ -57,12 +45,16 @@ export class GameService {
         gameData.minPlayers = gameData.minPlayers || 2
         gameData.maxPlayers = gameData.maxPlayers || 32
 
-        const options = new RequestOptions()
-        options.headers.set('x-username', userName)
-        options.headers.set('x-token', userToken)
+        const options = new RequestOptions({
+            headers: new Headers({
+                "x-username": userName,
+                "x-token": userToken
+            })
+        })
 
         return this.http.post(config.BASE_URL + 'games', gameData, options)
             .map(function(response) {
+                console.log(response.json())
                 return new Game(response.json())
             })
     }
