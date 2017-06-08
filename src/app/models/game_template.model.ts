@@ -1,12 +1,12 @@
 
 export class GameTemplate {
-    constructor(
-        public id: string
-    ) { }
+    public _id: string
 
-    static fromJson(json: { _id: string }) {
-        return new this(
-            json._id
-        )
+    constructor(json = null) {
+        this._id = json._id
+    }
+
+    toString() {
+        return this._id
     }
 }

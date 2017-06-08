@@ -40,7 +40,7 @@ export class GameService {
             search: queryParameters
         })
 
-        return this.http.get(config.BASE_URL + '/games', options)
+        return this.http.get(config.BASE_URL + 'games', options)
             .map((response) => {
                 const games = []
 

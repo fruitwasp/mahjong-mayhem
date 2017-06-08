@@ -9,17 +9,19 @@ import { MaterialModule } from './material.module'
 import { AppComponent } from './app.component'
 import { GamelistComponent } from './gamelist/gamelist.component'
 
+import { GameService, PlayerService } from './services'
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    GamelistComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        GamelistComponent,
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
