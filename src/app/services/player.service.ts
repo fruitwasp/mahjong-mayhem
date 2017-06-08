@@ -7,12 +7,15 @@ import { Observable } from 'rxjs/Observable'
 import { Game } from "../models"
 
 @Injectable()
-export class GameService {
+export class PlayerService {
     constructor(
         private http: Http
     ) { }
 
     join(game: Game) {
-
+        return this.http.post(config.BASE_URL + 'games/' + game._id + '/players', {})
+            .map(function(response) {
+                return response.json()
+            })
     }
 }

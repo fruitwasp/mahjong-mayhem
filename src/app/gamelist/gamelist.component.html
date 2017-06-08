@@ -1,10 +1,10 @@
 <div class="col s12">
 	<ul class="collection">
 		<button (click)="createGame()">Aanmaken</button>
-		<li class="collection-item" *ngFor="let game of games | async">
+		<li class="collection-item" *ngFor="let game of games">
 			<div class="card">
 				<div class="card-content">
-					<pre>{{ game.id }}</pre>
+					<pre>{{ game._id }}</pre>
 					<ul class="collection">
 						<li class="collection-item">
 							Created by:
@@ -12,7 +12,7 @@
 						</li>
 						<li class="collection-item">
 							Template:
-							{{ game.gameTemplate.id }}
+							{{ game.gameTemplate }}
 						</li>
 						<li class="collection-item">
 							State:
