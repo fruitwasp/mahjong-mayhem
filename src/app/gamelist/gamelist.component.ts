@@ -4,23 +4,23 @@ import { Http, Request, RequestMethod } from '@angular/http';
 import 'rxjs/Rx';
 
 import { Game } from '../models'
+import { GameService } from 'app/services'
 
 @Component({
-  selector: 'app-gamelist',
-  templateUrl: './gamelist.component.html',
-  styleUrls: ['./gamelist.component.css']
+    selector: 'app-gamelist',
+    templateUrl: './gamelist.component.html',
+    styleUrls: ['./gamelist.component.css']
 })
 export class GamelistComponent implements OnInit {
 
-	url = "http://mahjongmayhem.herokuapp.com/games"
-	games:Observable<Game[]>
+    constructor(
+        private http: Http,
+        private gameService: GameService
+    ) { }
 
-  constructor(private http:Http) {
-  	this.games = http.get(this.url).map(res => res.json())
-  }
+    ngOnInit() {
+        this.gameService.findPaged(1).subscribe((game) => {
 
-  ngOnInit() {
-  	console.log("works")
-  	console.log(this.games)
-  }
+        })
+    }
 }

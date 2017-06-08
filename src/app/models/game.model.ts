@@ -2,39 +2,41 @@
 import { Player, GameTemplate } from './'
 
 export class Game {
-    constructor(
-        public id: string,
-        public createdBy: Player,
-        public gameTemplate: GameTemplate,
-        public players: Player[],
-        public createdOn: string,
-        public state: string,
-        public minPlayers: number,
-        public maxPlayers: number
-    ) { }
 
-    static fromJson(json: {
-        _id: string,
-        createdBy: { _id: string, name: string },
-        gameTemplate: { _id: string },
-        players: any[],
-        createdOn: string,
-        state: string,
-        minPlayers: number,
-        maxPlayers: number
-    }) {
-        let gameTemplate = GameTemplate.fromJson(json.gameTemplate)
-        let players = json.players.map(player => Player.fromJson(player))
+    public _id: string
+    public createdBy: { _id: string, name: string }
+    public gameTemplate: GameTemplate
+    public createdOn: string
+    public startedOn: string
+    public endedOn: string
+    public state: string
+    public minPlayers: number
+    public maxPlayers: number
+    public players: Player[]
 
-        return new this(
-            json._id,
-            Player.fromJson(json.createdBy),
-            gameTemplate,
-            players,
-            json.createdOn,
-            json.state,
-            json.minPlayers,
-            json.maxPlayers
-        )
+    constructor(json = null) {
+        this._id = json._id
+        this.createdBy = json.createdBy
+        this.gameTemplate = new GameTemplate(json.gameTemplate)
+        this.createdOn = json.createdOn
+        this.startedOn = json.startedOn
+        this.endedOn = json.endedOn
+        this.state = json.state
+        this.minPlayers = json.minPlayers
+        this.maxPlayers = json.maxPlayers
+
+        this.players = []
+
+        for (let i in json.players) {
+            if (!json.players.hasOwnProperty(i)) {
+                continue
+            }
+
+            this.players.push(new Player(json.players[i]))
+        }
+    }
+
+    addPlayers(players: Player[]) {
+        this.players.push(players)
     }
 }

@@ -1,17 +1,11 @@
 
 export class Player {
-    constructor(
-        public id: string,
-        public name: string
-    ) { }
 
-    static fromJson(json: {
-        _id: string,
-        name: string
-    }) {
-        return new this(
-            json._id,
-            json.name
-        )
+    public _id: string
+    public name: string
+
+    constructor(json = null) {
+        this._id = json._id
+        this.name = json.name
     }
 }
