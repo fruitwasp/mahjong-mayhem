@@ -52,7 +52,7 @@ export class GameService {
             })
     }
 
-    create(userName: string, userToken: string, gameData: any) {
+    create(userName: string, userToken: string, gameData) {
         gameData.templateName = gameData.templateName || 'Shanghai'
         gameData.minPlayers = gameData.minPlayers || 2
         gameData.maxPlayers = gameData.maxPlayers || 32
@@ -61,7 +61,7 @@ export class GameService {
         options.headers.set('x-username', userName)
         options.headers.set('x-token', userToken)
 
-        return this.http.post(config.BASE_URL + 'games', gameData.json(), options)
+        return this.http.post(config.BASE_URL + 'games', gameData, options)
             .map(function(response) {
                 return new Game(response.json())
             })
