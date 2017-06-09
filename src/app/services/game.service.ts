@@ -4,7 +4,7 @@ import { Http, RequestOptions, Headers, URLSearchParams } from '@angular/http'
 import { PagerService } from './'
 import { config } from '../config'
 import { Observable } from 'rxjs/Observable'
-import { Game } from "app/models";
+import { Game } from 'app/models'
 
 @Injectable()
 export class GameService {

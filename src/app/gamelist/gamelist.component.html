@@ -1,33 +1,27 @@
-<div class="col s12">
-	<ul class="collection">
-		<button (click)="createGame()">Aanmaken</button>
-		<li class="collection-item" *ngFor="let game of games">
-			<div class="card">
-				<div class="card-content">
-					<pre>{{ game._id }}</pre>
-					<ul class="collection">
-						<li class="collection-item">
+<div>
+    <button md-button (click)="createGame()">Aanmaken</button>
+    <md-list>
+		<md-card md-list-item *ngFor="let game of games">
+            <div md-line>{{ game._id }}</div>
+						<div md-line>
 							Created by:
 							{{ game.createdBy.name }}
-						</li>
-						<li class="collection-item">
+						</div>
+						<div md-line>
 							Template:
 							{{ game.gameTemplate }}
-						</li>
-						<li class="collection-item">
+						</div>
+						<div md-line>
 							State:
 							{{ game.state }}
-						</li>
-						<li class="collection-item">
+						</div>
+						<div md-line>
 							Players:
 							{{ game.players.length }} / {{ game.maxPlayers}}
-						</li>
-					</ul>
+						</div>
+				<div md-line>
+					<a md-raised-button href="#">Join</a>
 				</div>
-				<div class="card-action">
-					<a href="#">Join</a>
-				</div>
-			</div>
-		</li>
-	</ul>
+		</md-card>
+    </md-list>
 </div>

@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { MaterialModule } from './material.module'
-
 import { AppComponent } from './app.component'
 import { GamelistComponent } from './gamelist/gamelist.component'
 
@@ -19,7 +18,8 @@ import { GameService, PlayerService } from './services'
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        MaterialModule
     ],
     providers: [],
     bootstrap: [AppComponent]

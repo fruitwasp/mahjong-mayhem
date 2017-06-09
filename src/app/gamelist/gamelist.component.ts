@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Http, Request, RequestMethod, RequestOptions, Headers } from '@angular/http'
+import { MdButton } from '@angular/material'
 import 'rxjs/Rx'
 import { config } from '../config'
 import { Game } from '../models'
-import { GameService, PlayerService } from 'app/services'
+import { GameService, PlayerService } from '../services'
 
 @Component({
     selector: 'app-gamelist',
