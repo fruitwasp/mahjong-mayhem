@@ -41,15 +41,15 @@ export class GameService {
             })
     }
 
-    create(userName: string, userToken: string, gameData: any) {
+    create(userName: string, userToken: string, gameData): Observable<Game> {
         gameData.templateName = gameData.templateName || 'Shanghai'
         gameData.minPlayers = gameData.minPlayers || 2
         gameData.maxPlayers = gameData.maxPlayers || 32
 
         const options = new RequestOptions({
             headers: new Headers({
-                "x-username": userName,
-                "x-token": userToken
+                'x-username': userName,
+                'x-token': userToken
             })
         })
 
