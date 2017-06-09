@@ -1,10 +1,9 @@
 
 import { Injectable } from '@angular/core'
-import { Http, RequestOptions, Headers } from '@angular/http'
-import { PagerService } from './'
-import { config } from '../config'
+import { Http, RequestOptions, URLSearchParams } from '@angular/http'
+import { config } from 'app/config'
 import { Observable } from 'rxjs/Observable'
-import { Game, GameTile } from '../models'
+import { Game, GameTile } from 'app/models'
 
 @Injectable()
 export class GameTileService {
@@ -12,10 +11,15 @@ export class GameTileService {
         private http: Http
     ) { }
 
-    find(game: Game) {
-        //TODO: show matched or not matched tiles query param
+    find(game: Game, matchedOrUnmatched: boolean = true): Observable<GameTile[]> {
+        const queryParameters = new URLSearchParams()
+        queryParameters.append('matched', matchedOrUnmatched.toString())
 
-        return this.http.get(config.BASE_URL + 'games/' + game._id + '/tiles')
+        const options = new RequestOptions({
+            search: queryParameters
+        })
+
+        return this.http.get(config.BASE_URL + 'games/' + game._id + '/tiles', options)
             .map((response) => {
                 response = response.json()
 
@@ -42,7 +46,7 @@ export class GameTileService {
         })
     }
 
-    findMatches(game: Game) {
+    findMatches(game: Game): Observable<GameTile[]> {
         return this.http.get(config.BASE_URL + '/games/' + game._id + '/tiles/matches', {
 
         }).map(response => {

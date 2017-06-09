@@ -1,8 +1,7 @@
 
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers, URLSearchParams } from '@angular/http'
-import { PagerService } from './'
-import { config } from '../config'
+import { config } from 'app/config'
 import { Observable } from 'rxjs/Observable'
 import { Game } from 'app/models'
 

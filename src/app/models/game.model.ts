@@ -9,7 +9,7 @@ export class Game {
     public createdOn: string
     public startedOn: string
     public endedOn: string
-    public state: string
+    public state: 'open' | 'started' | 'ended'
     public minPlayers: number
     public maxPlayers: number
     public players: Player[]
@@ -38,5 +38,9 @@ export class Game {
 
     addPlayers(players: Player[]) {
         this.players = players
+    }
+
+    hasState(state: string) {
+        return this.state === state
     }
 }

@@ -1,10 +1,8 @@
 
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers } from '@angular/http'
-import { PagerService } from './'
-import { config } from '../config'
-import { Observable } from 'rxjs/Observable'
-import { Game } from '../models'
+import { config } from 'app/config'
+import { Game } from 'app/models'
 
 @Injectable()
 export class PlayerService {
@@ -13,6 +11,11 @@ export class PlayerService {
     ) { }
 
     join(game: Game) {
+        if (!game.hasState('open')) {
+
+            return
+        }
+
         return this.http.post(config.BASE_URL + 'games/' + game._id + '/players', {})
             .map(function(response) {
                 return response.json()
@@ -20,6 +23,11 @@ export class PlayerService {
     }
 
     leave(game: Game) {
+        if (!game.hasState('open')) {
+
+            return
+        }
+
         return this.http.delete(config.BASE_URL + 'games/' + game._id + '/players', {})
             .map(function(response) {
                 return response.json()
