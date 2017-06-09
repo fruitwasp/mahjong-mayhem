@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core'
-import { Http, RequestOptions, Headers } from '@angular/http'
+import { Http, RequestOptions, Headers, URLSearchParams } from '@angular/http'
 import { PagerService } from './'
 import { config } from '../config'
 import { Observable } from 'rxjs/Observable'
@@ -21,8 +21,9 @@ export class GameService {
 
     findPaged(createdBy: string, pageSize: number = 10, pageIndex: number = 1): Observable<Game[]> {
         const queryParameters = new URLSearchParams()
-        queryParameters.set('pageSize', pageSize.toString())
-        queryParameters.set('pageIndex', pageIndex.toString())
+        queryParameters.append('pageSize', pageSize.toString())
+        queryParameters.append('pageIndex', pageIndex.toString())
+        queryParameters.append('state', 'open')
 
         const options = new RequestOptions({
             search: queryParameters
@@ -53,8 +54,7 @@ export class GameService {
         })
 
         return this.http.post(config.BASE_URL + 'games', gameData, options)
-            .map(function(response) {
-                console.log(response.json())
+            .map(response => {
                 return new Game(response.json())
             })
     }
