@@ -1,27 +1,21 @@
-<div>
-    <button md-button (click)="createGame()">Aanmaken</button>
-    <md-list>
-		<md-card md-list-item *ngFor="let game of games">
-            <div md-line>{{ game._id }}</div>
-						<div md-line>
-							Created by:
-							{{ game.createdBy.name }}
-						</div>
-						<div md-line>
-							Template:
-							{{ game.gameTemplate }}
-						</div>
-						<div md-line>
-							State:
-							{{ game.state }}
-						</div>
-						<div md-line>
-							Players:
-							{{ game.players.length }} / {{ game.maxPlayers}}
-						</div>
-				<div md-line>
-					<a md-raised-button href="#">Join</a>
-				</div>
-		</md-card>
-    </md-list>
-</div>
+<md-list>
+    <h3 md-subheader>Spellen</h3>
+
+    <md-card md-list-item *ngFor='let game of games'>
+        <md-card-header>
+            <md-card-title>{{ game.gameTemplate }}</md-card-title>
+            <md-card-subtitle>{{ game._id }}</md-card-subtitle>
+        </md-card-header>
+
+        <md-card-content>
+            <p>Aangemaakt door {{ game.createdBy.name }}</p>
+            <p>{{ game.playerCount() }} / {{ game.maxPlayers }} spelers</p>
+        </md-card-content>
+
+        <md-card-actions>
+            <button md-raised-button>JOINEN</button>
+        </md-card-actions>
+    </md-card>
+</md-list>
+
+<button md-button (click)='createGame()'>Aanmaken</button>

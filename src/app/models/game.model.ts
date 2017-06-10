@@ -55,4 +55,8 @@ export class Game {
 
         return true
     }
+
+    playerCount() {
+        return this.players.length
+    }
 }

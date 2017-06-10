@@ -18,7 +18,7 @@ import { GameService, PlayerService } from '../services'
 })
 export class GamelistComponent implements OnInit {
 
-    games: Game[]
+    private games: Game[]
 
     constructor(
         private http: Http,
@@ -33,8 +33,8 @@ export class GamelistComponent implements OnInit {
 
     createGame() {
         this.gameService.create(config.USER, config.TOKEN, {})
-        .subscribe(game => {
-          console.log(game)
-        })
+            .subscribe(game => {
+                console.log(game)
+            })
     }
 }
