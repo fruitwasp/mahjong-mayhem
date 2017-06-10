@@ -43,4 +43,16 @@ export class Game {
     hasState(state: string) {
         return this.state === state
     }
+
+    canJoin() {
+        if (this.players.length >= this.maxPlayers) {
+            return false
+        }
+
+        if (!this.hasState('open')) {
+            return false
+        }
+
+        return true
+    }
 }
