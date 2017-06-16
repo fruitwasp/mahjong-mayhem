@@ -1,0 +1,71 @@
+<h1 class='title'>Spellen</h1>
+
+<section>
+    <div class='container'>
+        <div class='field'>
+            <label class='label'>Spelstatus</label>
+            <p class='control'>
+                <span class='select'>
+            <select placeholder='Spelstatus' [(ngModel)]='selectedGameState'>
+                <option *ngFor='let state of config.GAME_STATES'>{{ state }}</option>
+            </select>
+        </span>
+            </p>
+        </div>
+    </div>
+
+    <div class='block'>
+        <a class='button is-primary' (click)='create()'>Aanmaken</a>
+    </div>
+</section>
+
+<section>
+    <div class='container'>
+        <div class='box'>
+            <article class="media" *ngFor='let game of games | gameFilter: selectedGameState' (click)='join(game)'>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>{{ game.gameTemplate }}</strong>
+                            <small>{{ game._id }}</small>
+                            <small style="float:right;">{{ game.playerCount() }} / {{ game.maxPlayers }} spelers</small>
+                            <br> Aangemaakt door {{ game.createdBy.name }}
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class='container'>
+        <nav class="pagination">
+            <a class="pagination-previous" ng-disabled="!hasPreviousPage()">Vorige</a>
+            <a class="pagination-next" ng-disabled="!hasNextPage()">Volgende</a>
+            <ul class="pagination-list">
+                <li>
+                    <a class="pagination-link">1</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+                <li>
+                    <a class="pagination-link">45</a>
+                </li>
+                <li>
+                    <a class="pagination-link is-current">46</a>
+                </li>
+                <li>
+                    <a class="pagination-link">47</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+                <li>
+                    <a class="pagination-link">86</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>

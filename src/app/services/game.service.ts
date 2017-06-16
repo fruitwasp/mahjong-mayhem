@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers, URLSearchParams } from '@angular/http'
 import { config } from 'app/config'
@@ -7,9 +6,20 @@ import { Game } from 'app/models'
 
 @Injectable()
 export class GameService {
+
+    private httpOptions: RequestOptions
+    public selectedGame: Game
+
     constructor(
         private http: Http
-    ) { }
+    ) {
+        this.httpOptions = new RequestOptions({
+            headers: new Headers({
+                'x-username': config.USER,
+                'x-token': config.TOKEN
+            })
+        })
+    }
 
     find(gameId: number): Observable<Game> {
         return this.http.get(config.BASE_URL + 'games/' + gameId)
@@ -18,15 +28,14 @@ export class GameService {
             })
     }
 
-    findPaged(createdBy: string, pageSize: number = 10, pageIndex: number = 1): Observable<Game[]> {
+    findPaged(pageIndex: number = 1, pageSize: number = 10): Observable<Game[]> {
         const queryParameters = new URLSearchParams()
         queryParameters.append('pageSize', pageSize.toString())
         queryParameters.append('pageIndex', pageIndex.toString())
         queryParameters.append('state', 'open')
 
-        const options = new RequestOptions({
-            search: queryParameters
-        })
+        const options = this.httpOptions
+        options.search = queryParameters
 
         return this.http.get(config.BASE_URL + 'games', options)
             .map((response) => {
@@ -40,19 +49,12 @@ export class GameService {
             })
     }
 
-    create(userName: string, userToken: string, gameData): Observable<Game> {
+    create(gameData): Observable<Game> {
         gameData.templateName = gameData.templateName || 'Shanghai'
         gameData.minPlayers = gameData.minPlayers || 2
         gameData.maxPlayers = gameData.maxPlayers || 32
 
-        const options = new RequestOptions({
-            headers: new Headers({
-                'x-username': userName,
-                'x-token': userToken
-            })
-        })
-
-        return this.http.post(config.BASE_URL + 'games', gameData, options)
+        return this.http.post(config.BASE_URL + 'games', gameData, this.httpOptions)
             .map(response => {
                 return new Game(response.json())
             })

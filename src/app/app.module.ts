@@ -1,26 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { MaterialModule } from './material.module'
 import { AppComponent } from './app.component'
-import { GamelistComponent } from './gamelist/gamelist.component'
 
 import { GameService, PlayerService } from './services'
+import { GameFilterPipe } from './pipes'
+import { GameBoardComponent, GameListComponent, GameTileComponent } from './components'
 
 @NgModule({
     declarations: [
         AppComponent,
-        GamelistComponent,
+
+        GameFilterPipe,
+
+        GameListComponent,
+        GameBoardComponent,
+        GameTileComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
-        MaterialModule
+        ReactiveFormsModule,
+        HttpModule
     ],
+    exports: [],
     providers: [],
     bootstrap: [AppComponent]
 })

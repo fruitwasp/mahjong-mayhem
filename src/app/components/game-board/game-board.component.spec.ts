@@ -1,25 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GamelistComponent } from './gamelist.component';
+import { GameBoardComponent } from './game-board.component';
 
-describe('GamelistComponent', () => {
-  let component: GamelistComponent;
-  let fixture: ComponentFixture<GamelistComponent>;
+describe('GameBoardComponent', () => {
+  let component: GameBoardComponent;
+  let fixture: ComponentFixture<GameBoardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GamelistComponent ]
+      declarations: [ GameBoardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GamelistComponent);
+    fixture = TestBed.createComponent(GameBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });

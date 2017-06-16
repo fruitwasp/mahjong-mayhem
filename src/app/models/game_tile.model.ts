@@ -18,4 +18,12 @@ export class GameTile {
         this._id = json._id
         this.match = new TileMatch(json.match)
     }
+
+    getStyle(): any {
+        return {
+            'left': (this.xPos * 18) + 'px',
+            'top': (this.yPos * 28 - (this.zPos * 2)) + 'px',
+            'z-index': (this.zPos * 100) - this.xPos + this.yPos
+        }
+    }
 }
