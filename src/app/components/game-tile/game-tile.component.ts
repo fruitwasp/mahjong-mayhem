@@ -6,7 +6,7 @@ import { LocalGameplayService } from 'app/services'
     selector: 'app-game-tile',
     template: `<div class="tile" [ngStyle]="gameTile.getStyle()" (click)="mark()"></div>`,
     styles: [`
-        .tilen{
+        .tile {
             background-image: url("http://mahjongmayhem.herokuapp.com/Tiles_sprite3.png");
             background-size: cover;
             position: absolute;
