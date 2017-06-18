@@ -1,7 +1,6 @@
 import { Component, OnInit, Directive, Input } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import { Http, Request, RequestMethod, RequestOptions, Headers } from '@angular/http'
-import 'rxjs/Rx'
+import { Router } from '@angular/router'
+
 import { config } from 'app/config'
 import { Game } from 'app/models'
 import { GameService, PlayerService } from 'app/services'
@@ -19,7 +18,7 @@ import { GameFilterPipe } from 'app/pipes'
 export class GameListComponent implements OnInit {
 
     public games: Array<Game>
-    public selectedGameState: string
+    public selectedGameState: string = 'open'
 
     public config = config
 
@@ -27,9 +26,9 @@ export class GameListComponent implements OnInit {
     public pageIndex: number = 1
 
     constructor(
-        private http: Http,
-        private gameService: GameService,
-        private playerService: PlayerService
+        public gameService: GameService,
+        public playerService: PlayerService,
+        public router: Router
     ) { }
 
     ngOnInit() {
@@ -38,24 +37,18 @@ export class GameListComponent implements OnInit {
 
     create() {
         this.gameService.create({})
-            .subscribe(game => {
-                console.log(game)
-            })
+            .subscribe(console.log)
     }
 
     view(game: Game) {
-        this.gameService.selectedGame = game
+        this.gameService.currentGame = game
 
-
+        this.router.navigate(['games', game._id, 'play'], game)
     }
 
     join(game: Game) {
         this.playerService.join(game)
             .subscribe(console.log)
-    }
-
-    filter() {
-
     }
 
     page(pageIndex: number = 1, pageSize: number = 10) {

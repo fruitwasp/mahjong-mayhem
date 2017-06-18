@@ -1,25 +1,33 @@
-
 import { Injectable } from '@angular/core'
-import { Http, RequestOptions, URLSearchParams } from '@angular/http'
+import { Http, RequestOptions, URLSearchParams, Headers } from '@angular/http'
 import { config } from 'app/config'
 import { Observable } from 'rxjs/Observable'
 import { Game, GameTile } from 'app/models'
 
 @Injectable()
 export class GameTileService {
+
+    private httpOptions: RequestOptions
+
     constructor(
         private http: Http
-    ) { }
-
-    find(game: Game, matchedOrUnmatched: boolean = true): Observable<GameTile[]> {
-        const queryParameters = new URLSearchParams()
-        queryParameters.append('matched', matchedOrUnmatched.toString())
-
-        const options = new RequestOptions({
-            search: queryParameters
+    ) {
+        this.httpOptions = new RequestOptions({
+            headers: new Headers({
+                'x-username': config.USER,
+                'x-token': config.TOKEN
+            })
         })
+    }
 
-        return this.http.get(config.BASE_URL + 'games/' + game._id + '/tiles', options)
+    findById(gameId: string, matchedOrUnmatched: boolean = true): Observable<GameTile[]> {
+        const queryParameters = new URLSearchParams()
+        // queryParameters.append('matched', matchedOrUnmatched.toString())
+
+        const options = this.httpOptions
+        options.search = queryParameters
+
+        return this.http.get(config.BASE_URL + 'games/' + gameId + '/tiles', options)
             .map((response) => {
                 response = response.json()
 
@@ -37,32 +45,36 @@ export class GameTileService {
             })
     }
 
+    find(game: Game, matchedOrUnmatched: boolean = true): Observable<GameTile[]> {
+        return this.findById(game._id, matchedOrUnmatched)
+    }
+
     match(thisTile: GameTile, thatTile: GameTile, game: Game) {
         return this.http.put(config.BASE_URL + 'games/' + game._id + '/tiles', {
             tile1Id: thisTile._id,
             tile2Id: thatTile._id
-        }).map(response => {
-            return response.json()
-        })
+        }, this.httpOptions)
+            .map(response => {
+                return response.json()
+            })
     }
 
     findMatches(game: Game): Observable<GameTile[]> {
-        return this.http.get(config.BASE_URL + '/games/' + game._id + '/tiles/matches', {
+        return this.http.get(config.BASE_URL + '/games/' + game._id + '/tiles/matches', this.httpOptions)
+            .map(response => {
+                response = response.json()
 
-        }).map(response => {
-            response = response.json()
+                const matches = []
 
-            const matches = []
+                for (const i in response) {
+                    if (!response.hasOwnProperty(i)) {
+                        continue
+                    }
 
-            for (const i in response) {
-                if (!response.hasOwnProperty(i)) {
-                    continue
+                    matches.push(new GameTile(response[i]))
                 }
 
-                matches.push(new GameTile(response[i]))
-            }
-
-            return matches
-        })
+                return matches
+            })
     }
 }

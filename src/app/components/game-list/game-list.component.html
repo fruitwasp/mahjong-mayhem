@@ -22,16 +22,22 @@
 <section>
     <div class='container'>
         <div class='box'>
-            <article class="media" *ngFor='let game of games | gameFilter: selectedGameState' (click)='join(game)'>
+            <article class="media" *ngFor='let game of games | gameFilter: selectedGameState'>
                 <div class="media-content">
                     <div class="content">
                         <p>
                             <strong>{{ game.gameTemplate }}</strong>
                             <small>{{ game._id }}</small>
-                            <small style="float:right;">{{ game.playerCount() }} / {{ game.maxPlayers }} spelers</small>
+                            <small style="float: right;">{{ game.playerCount() }} / {{ game.maxPlayers }} spelers</small>
                             <br> Aangemaakt door {{ game.createdBy.name }}
+                            <small style="float: right;">{{ game.state }}</small>
                         </p>
                     </div>
+
+                    <footer>
+                        <a class="button is-primary" (click)='view(game)'>Weergeven</a>
+                        <a class="button is-success" (click)='join(game)'>Deelnemen</a>
+                    </footer>
                 </div>
             </article>
         </div>

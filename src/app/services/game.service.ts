@@ -8,7 +8,7 @@ import { Game } from 'app/models'
 export class GameService {
 
     private httpOptions: RequestOptions
-    public selectedGame: Game
+    public currentGame: Game
 
     constructor(
         private http: Http
@@ -22,7 +22,7 @@ export class GameService {
     }
 
     find(gameId: number): Observable<Game> {
-        return this.http.get(config.BASE_URL + 'games/' + gameId)
+        return this.http.get(config.BASE_URL + 'games/' + gameId, this.httpOptions)
             .map((response) => {
                 return new Game(response.json())
             })
@@ -32,7 +32,7 @@ export class GameService {
         const queryParameters = new URLSearchParams()
         queryParameters.append('pageSize', pageSize.toString())
         queryParameters.append('pageIndex', pageIndex.toString())
-        queryParameters.append('state', 'open')
+        // queryParameters.append('state', 'open')
 
         const options = this.httpOptions
         options.search = queryParameters

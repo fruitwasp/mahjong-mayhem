@@ -1,10 +1,18 @@
-import { Component } from '@angular/core'
+import { Component, OnInit, Output } from '@angular/core'
+
+import { GameService } from 'app/services'
+import { Game } from 'app/models'
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    providers: [
+        GameService
+    ]
 })
-export class AppComponent {
-    title = 'app works!'
+export class AppComponent implements OnInit {
+
+    ngOnInit() {
+
+    }
 }

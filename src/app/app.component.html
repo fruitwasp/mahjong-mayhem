@@ -12,10 +12,10 @@
     <!-- This 'nav-menu' is hidden on mobile -->
     <!-- Add the modifier 'is-active' to display it on mobile -->
     <div class='nav-right nav-menu'>
-        <a class='nav-item'>Spellen</a>
+        <a routerLink='/games' routerLinkActive='active' class='nav-item'>Spellen</a>
     </div>
 </nav>
 
 <div class='container'>
-    <app-game-list></app-game-list>
+    <router-outlet></router-outlet>
 </div>

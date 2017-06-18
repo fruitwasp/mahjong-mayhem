@@ -3,11 +3,21 @@ import { GameBoardComponent, GameListComponent, GameTileComponent } from './comp
 
 export const routes: Routes = [
     {
-        path: '/games',
-        component: GameListComponent
-    },
-    {
-        path: '/games/:gameId/board',
-        component: GameBoardComponent
+        path: 'games',
+        children: [
+            {
+                path: 'list',
+                component: GameListComponent,
+            },
+            {
+                path: ':gameId',
+                children: [
+                    {
+                        path: 'play',
+                        component: GameBoardComponent
+                    }
+                ]
+            }
+        ]
     }
 ]

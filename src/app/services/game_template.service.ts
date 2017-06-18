@@ -6,12 +6,22 @@ import { Game, GameTile, GameTemplate } from 'app/models'
 
 @Injectable()
 export class GameTemplateService {
+
+    private httpOptions: RequestOptions
+
     constructor(
         private http: Http
-    ) { }
+    ) {
+        this.httpOptions = new RequestOptions({
+            headers: new Headers({
+                'x-username': config.USER,
+                'x-token': config.TOKEN
+            })
+        })
+    }
 
     findAll() {
-        return this.http.get(config.BASE_URL + 'gameTemplates')
+        return this.http.get(config.BASE_URL + 'gameTemplates', this.httpOptions)
             .map((response) => {
                 response = response.json()
 
@@ -30,7 +40,7 @@ export class GameTemplateService {
     }
 
     find(gameTemplateId: string) {
-        return this.http.get(config.BASE_URL + 'gameTemplates/' + gameTemplateId)
+        return this.http.get(config.BASE_URL + 'gameTemplates/' + gameTemplateId, this.httpOptions)
             .map((response) => {
                 return new GameTemplate(response.json())
             })

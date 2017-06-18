@@ -14,9 +14,16 @@ export class GameTile {
         this.xPos = json.xPos
         this.yPos = json.yPos
         this.zPos = json.zPos
-        this.tile = new Tile(json.tile)
+
+        if (json.tile) {
+            this.tile = new Tile(json.tile)
+        }
+
         this._id = json._id
-        this.match = new TileMatch(json.match)
+
+        if (json.match) {
+            this.match = new TileMatch(json.match)
+        }
     }
 
     getStyle(): any {
