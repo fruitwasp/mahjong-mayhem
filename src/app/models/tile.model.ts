@@ -12,4 +12,9 @@ export class Tile {
         this.name = json.name
         this.matchesWholeSuit = json.matchesWholeSuit
     }
+
+    isMatch(tile: Tile) {
+        return this.suit === tile.suit
+            && this.name === tile.name
+    }
 }

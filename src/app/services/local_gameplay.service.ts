@@ -1,0 +1,51 @@
+import { Injectable } from '@angular/core'
+
+import { config } from 'app/config'
+import { GameTile } from 'app/models'
+
+@Injectable()
+export class LocalGameplayService {
+
+    public selectedGameTiles: Array<GameTile>
+
+    constructor() {
+        this.selectedGameTiles = []
+    }
+
+    markGameTile(gameTile: GameTile) {
+        if (this.selectedGameTiles.length > 1) {
+            return false
+        }
+
+        this.selectedGameTiles.push(gameTile)
+
+        if (this.selectedGameTiles.length > 1) {
+            this.matchMarkedTiles()
+        }
+    }
+
+    unmarkGameTile(gameTile: GameTile) {
+        if (this.selectedGameTiles.length < 1) {
+            return false
+        }
+
+        const i = this.selectedGameTiles.indexOf(gameTile)
+
+        if (!i) {
+            return false
+        }
+
+        this.selectedGameTiles.splice(i, 1)
+    }
+
+    matchMarkedTiles() {
+        if (this.selectedGameTiles.length < 2) {
+            return false
+        }
+
+        const thisTile = this.selectedGameTiles[0]
+        const thatTile = this.selectedGameTiles[1]
+
+        return
+    }
+}

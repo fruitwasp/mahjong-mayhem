@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
 import { Game, GameTemplate, GameTile } from 'app/models'
-import { GameService, GameTileService, GameTemplateService } from 'app/services'
+import { GameService, GameTileService, GameTemplateService, LocalGameplayService } from 'app/services'
 
 @Component({
     selector: 'app-game-board',
@@ -18,7 +18,8 @@ export class GameBoardComponent implements OnInit {
         public gameService: GameService,
         public gameTileService: GameTileService,
         public gameTemplateService: GameTemplateService,
-        public route: ActivatedRoute
+        public route: ActivatedRoute,
+        public localGameplaysService: LocalGameplayService
     ) {
         const gameId = route.snapshot.params.gameId
 
@@ -38,11 +39,5 @@ export class GameBoardComponent implements OnInit {
             })
     }
 
-    ngOnInit() {
-
-    }
-
-    selectTile(gameTile: GameTile) {
-        console.log('tile selected')
-    }
+    ngOnInit() { }
 }

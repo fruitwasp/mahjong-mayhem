@@ -44,12 +44,16 @@ export class Game {
         return this.state === state
     }
 
+    canView() {
+        return !this.hasState('open')
+    }
+
     canJoin() {
-        if (this.players.length >= this.maxPlayers) {
+        if (!this.hasState('open')) {
             return false
         }
 
-        if (!this.hasState('open')) {
+        if (this.players.length >= this.maxPlayers) {
             return false
         }
 

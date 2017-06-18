@@ -33,4 +33,13 @@ export class GameTile {
             'z-index': (this.zPos * 100) - this.xPos + this.yPos
         }
     }
+
+    isMatch(gameTile: GameTile) {
+        return this.tile.isMatch(gameTile.tile)
+    }
+
+    canMatch() {
+        // TODO: position checking
+        return true
+    }
 }

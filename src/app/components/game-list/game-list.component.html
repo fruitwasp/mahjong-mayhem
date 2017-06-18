@@ -35,8 +35,8 @@
                     </div>
 
                     <footer>
-                        <a class="button is-primary" (click)='view(game)'>Weergeven</a>
-                        <a class="button is-success" (click)='join(game)'>Deelnemen</a>
+                        <button class="button is-primary" (click)='view(game)' [disabled]='!game.canView()'>Weergeven</button>
+                        <button class="button is-success" (click)='join(game)' [disabled]='!game.canJoin()'>Deelnemen</button>
                     </footer>
                 </div>
             </article>

@@ -6,9 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component'
 
-import { GameService, GameTemplateService, GameTileService, PlayerService } from './services'
+import { GameService, GameTemplateService, GameTileService, PlayerService, LocalGameplayService } from './services'
 import { GameFilterPipe } from './pipes'
-import { GameBoardComponent, GameListComponent, GameTileComponent } from './components'
+import { GameBoardComponent, GameListComponent, GameTileComponent, NavigationComponent } from './components'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise'
@@ -16,15 +16,17 @@ import 'rxjs/add/operator/toPromise'
 import { RouterModule } from '@angular/router'
 import { routes } from './app.routes'
 
+
 @NgModule({
     declarations: [
         AppComponent,
 
         GameFilterPipe,
 
-        GameListComponent,
         GameBoardComponent,
-        GameTileComponent
+        GameListComponent,
+        GameTileComponent,
+        NavigationComponent
     ],
     imports: [
         BrowserModule,
@@ -39,7 +41,8 @@ import { routes } from './app.routes'
         GameService,
         GameTemplateService,
         GameTileService,
-        PlayerService
+        PlayerService,
+        LocalGameplayService
     ],
     bootstrap: [AppComponent]
 })
