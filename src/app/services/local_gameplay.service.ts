@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core'
 
 import { config } from 'app/config'
-import { GameTile } from 'app/models'
+import { Game, GameTile } from 'app/models'
+import { GameTileService } from 'app/services'
 
 @Injectable()
 export class LocalGameplayService {
 
+    public selectedGame: Game
     public selectedGameTiles: Array<GameTile>
 
-    constructor() {
+    constructor(public gameTileService: GameTileService) {
         this.selectedGameTiles = []
     }
 
@@ -46,6 +48,6 @@ export class LocalGameplayService {
         const thisTile = this.selectedGameTiles[0]
         const thatTile = this.selectedGameTiles[1]
 
-        return
+        this.gameTileService.match(thisTile, thatTile, this.selectedGame)
     }
 }

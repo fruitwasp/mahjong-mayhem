@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, URLSearchParams, Headers } from '@angular/http'
-import { config } from 'app/config'
+
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/toPromise'
 import { Observable } from 'rxjs/Observable'
+
+import { config } from 'app/config'
 import { Game, GameTile } from 'app/models'
 
 @Injectable()
@@ -20,7 +24,7 @@ export class GameTileService {
         })
     }
 
-    findById(gameId: string, matchedOrUnmatched: boolean = true): Observable<GameTile[]> {
+    findById(gameId: string, matchedOrUnmatched: boolean = false): Observable<GameTile[]> {
         const queryParameters = new URLSearchParams()
         // queryParameters.append('matched', matchedOrUnmatched.toString())
 

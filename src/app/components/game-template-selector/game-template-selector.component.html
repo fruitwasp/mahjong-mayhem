@@ -1,0 +1,9 @@
+<h1 class='title'>Speltemplates</h1>
+
+<section>
+    <div class='container'>
+        <div class='box gameBoard' *ngFor='let gameTemplate of gameTemplates'>
+            <app-game-tile *ngFor='let gameTile of gameTemplate.tiles' [gameTile]='gameTile'></app-game-tile>
+        </div>
+    </div>
+</section>

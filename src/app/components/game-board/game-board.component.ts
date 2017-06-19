@@ -30,6 +30,8 @@ export class GameBoardComponent implements OnInit {
                 gameTemplateService.find(game.gameTemplate._id)
                     .subscribe((gameTemplate) => {
                         this.gameTemplate = gameTemplate
+
+                        this.matchGameTiles(gameTemplate.gameTiles)
                     })
             })
 
@@ -40,4 +42,8 @@ export class GameBoardComponent implements OnInit {
     }
 
     ngOnInit() { }
+
+    matchGameTiles(gameTiles: Array<GameTile>) {
+
+    }
 }

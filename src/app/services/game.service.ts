@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers, URLSearchParams } from '@angular/http'
-import { config } from 'app/config'
+
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/toPromise'
 import { Observable } from 'rxjs/Observable'
+
+import { config } from 'app/config'
 import { Game } from 'app/models'
 
 @Injectable()
@@ -28,11 +32,11 @@ export class GameService {
             })
     }
 
-    findPaged(pageIndex: number = 1, pageSize: number = 10): Observable<Game[]> {
+    findPaged(pageIndex: number = 1, pageSize: number = 10, gameState: string): Observable<Game[]> {
         const queryParameters = new URLSearchParams()
         queryParameters.append('pageSize', pageSize.toString())
         queryParameters.append('pageIndex', pageIndex.toString())
-        // queryParameters.append('state', 'open')
+        queryParameters.append('state', gameState)
 
         const options = this.httpOptions
         options.search = queryParameters

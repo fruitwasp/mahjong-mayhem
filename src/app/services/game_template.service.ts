@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers } from '@angular/http'
 import { config } from 'app/config'
+
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/toPromise'
 import { Observable } from 'rxjs/Observable'
+
 import { Game, GameTile, GameTemplate } from 'app/models'
 
 @Injectable()

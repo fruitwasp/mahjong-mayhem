@@ -25,6 +25,8 @@ export class GameListComponent implements OnInit {
     public pageSize: number = 10
     public pageIndex: number = 1
 
+    public yesIsLoading: boolean
+
     constructor(
         public gameService: GameService,
         public playerService: PlayerService,
@@ -52,10 +54,18 @@ export class GameListComponent implements OnInit {
     }
 
     page(pageIndex: number = 1, pageSize: number = 10) {
-        this.gameService.findPaged(pageIndex, pageSize)
+        this.yesIsLoading = true
+
+        this.gameService.findPaged(pageIndex, pageSize, this.selectedGameState)
             .subscribe((games) => {
                 this.games = games
+
+                this.yesIsLoading = false
             })
+    }
+
+    visiblePages() {
+        return [1, 2, 3, 4, 5]
     }
 
     previousPage() {
@@ -84,5 +94,11 @@ export class GameListComponent implements OnInit {
 
     hasNextPage() {
         return true
+    }
+
+    onSelectedGameStateChanged(gameState: string) {
+        this.selectedGameState = gameState
+
+        this.page(this.pageIndex, this.pageSize)
     }
 }

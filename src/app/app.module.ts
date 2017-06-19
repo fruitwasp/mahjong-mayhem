@@ -8,14 +8,17 @@ import { AppComponent } from './app.component'
 
 import { GameService, GameTemplateService, GameTileService, PlayerService, LocalGameplayService } from './services'
 import { GameFilterPipe } from './pipes'
-import { GameBoardComponent, GameListComponent, GameTileComponent, NavigationComponent } from './components'
-
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/toPromise'
+import {
+    GameBoardComponent,
+    GameListComponent,
+    GameTileComponent,
+    NavigationComponent,
+    GameTemplateSelectorComponent,
+    LoadingComponent
+} from './components'
 
 import { RouterModule } from '@angular/router'
 import { routes } from './app.routes'
-
 
 @NgModule({
     declarations: [
@@ -26,7 +29,9 @@ import { routes } from './app.routes'
         GameBoardComponent,
         GameListComponent,
         GameTileComponent,
-        NavigationComponent
+        NavigationComponent,
+        GameTemplateSelectorComponent,
+        LoadingComponent
     ],
     imports: [
         BrowserModule,

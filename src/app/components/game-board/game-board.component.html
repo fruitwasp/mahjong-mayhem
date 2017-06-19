@@ -1,4 +1,16 @@
-<div class='gameBoard'>
-    <app-game-tile *ngFor='let gameTile of gameTemplate.gameTiles' [gameTile]='gameTile'></app-game-tile>
-    <app-game-tile *ngFor='let gameTile of gameTiles' [gameTile]='gameTile'></app-game-tile>
-</div>
+<section>
+    <div class='container'>
+
+        <div class='box gameBoard' *ngIf='gameTemplate'>
+            <app-game-tile *ngFor='let gameTile of gameTemplate.gameTiles' [gameTile]='gameTile'></app-game-tile>
+            <app-game-tile *ngFor='let gameTile of gameTiles' [gameTile]='gameTile'></app-game-tile>
+        </div>
+    </div>
+</section>
+
+<section>
+    <details>
+        <summary>Deelnemers</summary>
+        <p *ngFor='let player of game.players'>{{ player._id }}</p>
+    </details>
+</section>

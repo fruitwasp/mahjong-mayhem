@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers } from '@angular/http'
+
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/toPromise'
+import { Observable } from 'rxjs/Observable'
+
 import { config } from 'app/config'
 import { Game } from 'app/models'
 

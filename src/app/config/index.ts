@@ -7,5 +7,16 @@ export const config = {
         'playing',
         'finished',
         'all'
-    ]
+    ],
+    DEFAULT_GAME_STATE: 'open',
+    GAME_TEMPLATES: [
+        'Dragon',
+        'Monkey',
+        'Ox',
+        'Ram',
+        'Rooster',
+        'Shanghai',
+        'Snake'
+    ],
+    LOGIN_URL: 'https://mahjongmayhem.herokuapp.com/auth/avans'
 }
