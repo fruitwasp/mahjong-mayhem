@@ -6,8 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component'
 
-import { GameService, GameTemplateService, GameTileService, PlayerService, LocalGameplayService } from './services'
-import { GameFilterPipe } from './pipes'
+import {
+    GameService,
+    GameTemplateService,
+    GameTileService,
+    PlayerService,
+    LocalGameplayService,
+    LoadingService
+} from './services'
+import { GameFilterPipe, GamePlayerFilterPipe } from './pipes'
 import {
     GameBoardComponent,
     GameListComponent,
@@ -25,6 +32,7 @@ import { routes } from './app.routes'
         AppComponent,
 
         GameFilterPipe,
+        GamePlayerFilterPipe,
 
         GameBoardComponent,
         GameListComponent,
@@ -47,7 +55,8 @@ import { routes } from './app.routes'
         GameTemplateService,
         GameTileService,
         PlayerService,
-        LocalGameplayService
+        LocalGameplayService,
+        LoadingService
     ],
     bootstrap: [AppComponent]
 })

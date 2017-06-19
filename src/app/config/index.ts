@@ -18,5 +18,8 @@ export const config = {
         'Shanghai',
         'Snake'
     ],
-    LOGIN_URL: 'https://mahjongmayhem.herokuapp.com/auth/avans'
+    LOGIN_URL: 'https://mahjongmayhem.herokuapp.com/auth/avans',
+    GAME_PLAYER_FILTERS: {
+        NO_GAME_PLAYER: '<selecteer speler>'
+    }
 }

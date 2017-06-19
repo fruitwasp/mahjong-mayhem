@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 
 import { config } from 'app/config'
 import { Game } from 'app/models'
-import { GameService, PlayerService } from 'app/services'
+import { GameService, PlayerService, LoadingService } from 'app/services'
 import { GameFilterPipe } from 'app/pipes'
 
 @Component({
@@ -19,17 +19,17 @@ export class GameListComponent implements OnInit {
 
     public games: Array<Game>
     public selectedGameState: string = 'open'
+    public selectedGamePlayer: string
 
     public config = config
 
     public pageSize: number = 10
     public pageIndex: number = 1
 
-    public yesIsLoading: boolean
-
     constructor(
         public gameService: GameService,
         public playerService: PlayerService,
+        public loadingService: LoadingService,
         public router: Router
     ) { }
 
@@ -38,8 +38,10 @@ export class GameListComponent implements OnInit {
     }
 
     create() {
+        this.loadingService.push()
+
         this.gameService.create({})
-            .subscribe(console.log)
+            .subscribe(this.loadingService.pop)
     }
 
     view(game: Game) {
@@ -49,18 +51,20 @@ export class GameListComponent implements OnInit {
     }
 
     join(game: Game) {
+        this.loadingService.push()
+
         this.playerService.join(game)
-            .subscribe(console.log)
+            .subscribe(this.loadingService.pop)
     }
 
     page(pageIndex: number = 1, pageSize: number = 10) {
-        this.yesIsLoading = true
+        this.loadingService.push()
 
         this.gameService.findPaged(pageIndex, pageSize, this.selectedGameState)
             .subscribe((games) => {
                 this.games = games
 
-                this.yesIsLoading = false
+                this.loadingService.pop()
             })
     }
 
