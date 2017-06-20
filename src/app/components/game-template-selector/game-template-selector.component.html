@@ -1,15 +1,11 @@
-<h1 class='title'>Speltemplates</h1>
+<div class='modal' [ngClass]="{'is-active': visibility}">
+    <div class='modal-background'></div>
+    <div class='modal-content'>
+        <app-loading></app-loading>
 
-<div class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-content">
-   <section>
-    <div class='container'>
-        <div class='box gameBoard' *ngFor='let gameTemplate of gameTemplates'>
+        <div class='box is-full-width' *ngFor='let gameTemplate of gameTemplates' (click)='selectGameTemplate(gameTemplate)'>
             <app-game-tile *ngFor='let gameTile of gameTemplate.tiles' [gameTile]='gameTile'></app-game-tile>
         </div>
     </div>
-    </section>
-  </div>
-  <button class="modal-close"></button>
+    <button class='modal-close' (click)='toggle()'></button>
 </div>

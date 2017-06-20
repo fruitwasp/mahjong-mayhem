@@ -26,7 +26,7 @@ export class GameTileService {
 
     findById(gameId: string, matchedOrUnmatched: boolean = false): Observable<GameTile[]> {
         const queryParameters = new URLSearchParams()
-        // queryParameters.append('matched', matchedOrUnmatched.toString())
+        queryParameters.append('matched', matchedOrUnmatched.toString())
 
         const options = this.httpOptions
         options.search = queryParameters
@@ -38,7 +38,7 @@ export class GameTileService {
                 const tiles = []
 
                 for (const i in response) {
-                    if (response.hasOwnProperty(i)) {
+                    if (!response.hasOwnProperty(i)) {
                         continue
                     }
 
