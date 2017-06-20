@@ -1,19 +1,10 @@
 import { Component, Input, style } from '@angular/core'
-import { GameTile } from 'app/models'
+import { GameTile, Game } from 'app/models'
 import { LocalGameplayService } from 'app/services'
 
 @Component({
     selector: 'app-game-tile',
-    template: `<div class="tile" [ngStyle]="gameTile.getStyle()" (click)="mark()"></div>`,
-    styles: [`
-        .tile {
-            background-image: url("http://mahjongmayhem.herokuapp.com/Tiles_sprite3.png");
-            background-size: cover;
-            position: absolute;
-            width: 40px;
-            height: 60px;
-        }
-    `]
+    template: `<div [ngStyle]="gameTile.getStyle()" (click)="mark()"></div>`
 })
 export class GameTileComponent {
 
@@ -25,6 +16,8 @@ export class GameTileComponent {
     ) { }
 
     mark() {
+        console.log(this.gameTile)
+
         this.localGameplayService.markGameTile(this.gameTile)
     }
 }

@@ -13,8 +13,12 @@ export class Tile {
         this.matchesWholeSuit = json.matchesWholeSuit
     }
 
-    isMatch(tile: Tile) {
+    isMatch(tile: Tile): boolean {
         return this.suit === tile.suit
             && this.name === tile.name
+    }
+
+    getStyleBackground(): string {
+        return 'assets/img/' + this.suit + this.name + '.png'
     }
 }

@@ -12,38 +12,34 @@ export class GameBoardComponent implements OnInit {
 
     public game: Game
     public gameTemplate: GameTemplate
-    public gameTiles: GameTile[]
+    public gameTiles: Array<GameTile>
 
     constructor(
         public gameService: GameService,
         public gameTileService: GameTileService,
         public gameTemplateService: GameTemplateService,
         public route: ActivatedRoute,
-        public localGameplaysService: LocalGameplayService
+        public localGameplayService: LocalGameplayService
     ) {
         const gameId = route.snapshot.params.gameId
 
         gameService.find(gameId)
             .subscribe((game) => {
                 this.game = game
-
-                gameTemplateService.find(game.gameTemplate._id)
-                    .subscribe((gameTemplate) => {
-                        this.gameTemplate = gameTemplate
-
-                        this.matchGameTiles(gameTemplate.gameTiles)
-                    })
+                this.localGameplayService.selectedGame = game
             })
 
         gameTileService.findById(gameId)
             .subscribe((gameTiles) => {
                 this.gameTiles = gameTiles
+
+                this.linkGameTiles(gameTiles)
             })
     }
 
     ngOnInit() { }
 
-    matchGameTiles(gameTiles: Array<GameTile>) {
+    linkGameTiles(gameTiles: Array<GameTile>) {
 
     }
 }

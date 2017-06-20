@@ -30,7 +30,12 @@ export class GameTile {
         return {
             'left': (this.xPos * 18) + 'px',
             'top': (this.yPos * 28 - (this.zPos * 2)) + 'px',
-            'z-index': (this.zPos * 100) - this.xPos + this.yPos
+            'z-index': (this.zPos * 100) - this.xPos + this.yPos,
+            'background-image': 'url("' + this.tile.getStyleBackground() + '")',
+            'background-size': 'cover',
+            'position': 'absolute',
+            'width': '40px',
+            'height': '60px'
         }
     }
 

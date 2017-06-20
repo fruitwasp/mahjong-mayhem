@@ -1,16 +1,19 @@
-<section>
-    <div class='container'>
+<section *ngIf='game'>
+    <div class='columns'>
+        <div class='column is-3'>
+            <h1 class="title">{{ game.gameTemplate }}</h1>
+            <h2 class="subtitle">{{ game._id }}</h2>
 
-        <div class='box gameBoard' *ngIf='gameTemplate'>
-            <app-game-tile *ngFor='let gameTile of gameTemplate.gameTiles' [gameTile]='gameTile'></app-game-tile>
-            <app-game-tile *ngFor='let gameTile of gameTiles' [gameTile]='gameTile'></app-game-tile>
+            <details open>
+                <summary>Deelnemers</summary>
+                <p *ngFor='let player of game.players'>{{ player._id }}</p>
+            </details>
+        </div>
+
+        <div class='column'>
+            <div class='box' *ngIf='gameTiles'>
+                <app-game-tile *ngFor='let gameTile of gameTiles' [gameTile]='gameTile' style='position:relative'></app-game-tile>
+            </div>
         </div>
     </div>
-</section>
-
-<section>
-    <details>
-        <summary>Deelnemers</summary>
-        <p *ngFor='let player of game.players'>{{ player._id }}</p>
-    </details>
 </section>

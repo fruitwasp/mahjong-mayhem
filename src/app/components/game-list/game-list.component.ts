@@ -37,6 +37,10 @@ export class GameListComponent implements OnInit {
         this.page(this.pageIndex, this.pageSize)
     }
 
+    preCreate() {
+
+    }
+
     create() {
         this.loadingService.push()
 
@@ -58,6 +62,8 @@ export class GameListComponent implements OnInit {
     }
 
     page(pageIndex: number = 1, pageSize: number = 10) {
+        this.games = []
+
         this.loadingService.push()
 
         this.gameService.findPaged(pageIndex, pageSize, this.selectedGameState)
@@ -66,10 +72,6 @@ export class GameListComponent implements OnInit {
 
                 this.loadingService.pop()
             })
-    }
-
-    visiblePages() {
-        return [1, 2, 3, 4, 5]
     }
 
     previousPage() {
@@ -104,5 +106,9 @@ export class GameListComponent implements OnInit {
         this.selectedGameState = gameState
 
         this.page(this.pageIndex, this.pageSize)
+    }
+
+    gamesCount() {
+        return this.games && this.games.length || 0
     }
 }
