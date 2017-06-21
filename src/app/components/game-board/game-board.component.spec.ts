@@ -2,29 +2,43 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpModule } from '@angular/http'
 
-import { GameListComponent, LoadingComponent, GameTemplateSelectorComponent, GameTileComponent } from 'app/components'
+import { GameBoardComponent, LoadingComponent, GameTemplateSelectorComponent, GameTileComponent } from 'app/components'
 import { GameFilterPipe, GamePlayerFilterPipe } from 'app/pipes'
 
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/of'
 
-import { Game } from 'app/models'
+import { Game, GameTile, Tile } from 'app/models'
 
-import { LoadingService, GameService, GameTemplateService } from 'app/services'
+import { LoadingService, GameService, GameTileService, GameTemplateService, LocalGameplayService } from 'app/services'
 
-// class MockGameService {
-//     findPaged(pageIndex: number = 1, pageSize: number = 10, gameState: string): Observable<Game[]> {
+class MockGamePlayService {
+    public selectedGame: Game
+    public selectedGameTiles: Array<GameTile>
+}
 
+class MockTileService {
+    find() {
+        return Observable.of([{}])
+    }
 
-//     }
-// }
+    findById() {
+        return Observable.of([new GameTile({"tile":new Tile({
+            "_id": "1234" ,
+            "name": "1",
+            "suit": "bamboo"
+        })})])
+    }
+
+}
+
 class MockGameService {
-    create(gameData) {
-        gameData.templateName = gameData.templateName || 'Shanghai'
-        gameData.minPlayers = gameData.minPlayers || 2
-        gameData.maxPlayers = gameData.maxPlayers || 32
+    findPages() {
+        return Observable.of([{}, {}])
+    }
 
-        return new Game({"gameTemplate": gameData.templateName, "minPlayers": gameData.minPlayers, "maxPlayers": gameData.maxPlayers})
+    find() {
+        return Observable.of({})
     }
 }
 
@@ -56,11 +70,10 @@ class MockLoadingService {
     }
 }
 
-describe('GameListComponent', () => {
+describe('GameBoardComponent', () => {
 
-  let component: GameListComponent
-  let fixture: ComponentFixture<GameListComponent>
-  let compiled: any
+  let component: GameBoardComponent
+  let fixture: ComponentFixture<GameBoardComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -68,22 +81,22 @@ describe('GameListComponent', () => {
             HttpModule,
             RouterTestingModule
         ],
-      declarations: [ GameListComponent, GameFilterPipe, LoadingComponent, GamePlayerFilterPipe,
-        GameTemplateSelectorComponent,
-        GameTileComponent ],
+      declarations: [ GameBoardComponent, GameTileComponent, GameFilterPipe, LoadingComponent, GamePlayerFilterPipe,
+      GameTemplateSelectorComponent, GameTileComponent ],
       providers: [
           { provide: LoadingService, useClass: MockLoadingService },
+          { provide: GameService, useClass: MockGameService },
+          { provide: GameTileService, useClass: MockTileService },
           { provide: GameTemplateService, useClass: MockTemplateService },
-          { provide: GameService, useClass: MockGameService }
+          { provide: LocalGameplayService, useClass: MockGamePlayService }
       ]
     })
     .compileComponents()
-  }));
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameListComponent)
+    fixture = TestBed.createComponent(GameBoardComponent)
     component = fixture.componentInstance
-    compiled = fixture.debugElement.nativeElement
     fixture.detectChanges()
   })
 
