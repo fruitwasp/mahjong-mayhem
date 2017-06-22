@@ -12,7 +12,9 @@ import {
     GameTileService,
     PlayerService,
     LocalGameplayService,
-    LoadingService
+    LoadingService,
+    LocalLoginService,
+    HttpService
 } from './services'
 import { GameFilterPipe, GamePlayerFilterPipe } from './pipes'
 import {
@@ -21,7 +23,8 @@ import {
     GameTileComponent,
     NavigationComponent,
     GameTemplateSelectorComponent,
-    LoadingComponent
+    LoadingComponent,
+    LoginComponent
 } from './components'
 
 import { RouterModule } from '@angular/router'
@@ -39,7 +42,8 @@ import { routes } from './app.routes'
         GameTileComponent,
         NavigationComponent,
         GameTemplateSelectorComponent,
-        LoadingComponent
+        LoadingComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
@@ -51,12 +55,15 @@ import { routes } from './app.routes'
     ],
     exports: [],
     providers: [
+        LocalLoginService,
+        HttpService,
         GameService,
         GameTemplateService,
         GameTileService,
         PlayerService,
         LocalGameplayService,
         LoadingService
+
     ],
     bootstrap: [AppComponent]
 })

@@ -5,21 +5,21 @@ export class LoadingService {
 
     private yesIsLoadingCount: number = 0
 
+    yesIsLoading() {
+        return this.yesIsLoadingCount > 0
+    }
+
     push() {
-        this.yesIsLoadingCount++
+        this.yesIsLoadingCount = this.yesIsLoadingCount + 1
 
         return this.yesIsLoadingCount
     }
 
     pop() {
-        if (this.yesIsLoading()) {
-            this.yesIsLoadingCount--
+        if (this.yesIsLoadingCount > 0) {
+            this.yesIsLoadingCount = this.yesIsLoadingCount - 1
         }
 
         return this.yesIsLoadingCount
-    }
-
-    yesIsLoading() {
-        return this.yesIsLoadingCount > 0
     }
 }

@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core'
-import { Http, RequestOptions, Headers } from '@angular/http'
+import { Injectable, Inject } from '@angular/core'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise'
@@ -7,22 +6,14 @@ import { Observable } from 'rxjs/Observable'
 
 import { config } from 'app/config'
 import { Game } from 'app/models'
+import { HttpService } from 'app/services'
 
 @Injectable()
 export class PlayerService {
 
-    private httpOptions: RequestOptions
-
     constructor(
-        private http: Http
-    ) {
-        this.httpOptions = new RequestOptions({
-            headers: new Headers({
-                'x-username': config.USER,
-                'x-token': config.TOKEN
-            })
-        })
-    }
+        @Inject(HttpService) private http: HttpService
+    ) { }
 
     join(game: Game) {
         if (!game.hasState('open')) {
@@ -30,7 +21,7 @@ export class PlayerService {
             return
         }
 
-        return this.http.post(config.BASE_URL + 'games/' + game._id + '/players', {}, this.httpOptions)
+        return this.http.post(config.BASE_URL + 'games/' + game._id + '/players', {}, this.http.getRequestOptions())
             .map(function(response) {
                 return response.json()
             })
@@ -42,7 +33,7 @@ export class PlayerService {
             return
         }
 
-        return this.http.delete(config.BASE_URL + 'games/' + game._id + '/players', this.httpOptions)
+        return this.http.delete(config.BASE_URL + 'games/' + game._id + '/players', this.http.getRequestOptions())
             .map(function(response) {
                 return response.json()
             })

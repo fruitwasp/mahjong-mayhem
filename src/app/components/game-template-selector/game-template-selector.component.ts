@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 
 import { GameTemplateService, LoadingService } from 'app/services'
 import { GameTemplate } from 'app/models'
@@ -14,6 +14,9 @@ export class GameTemplateSelectorComponent implements OnInit {
 
     public gameTemplates: Array<GameTemplate>
     public visibility: boolean = false
+
+    @Output()
+    public event = new EventEmitter()
 
     constructor(
         public gameTemplateService: GameTemplateService,
@@ -33,5 +36,13 @@ export class GameTemplateSelectorComponent implements OnInit {
 
     toggle() {
         this.visibility = !this.visibility
+    }
+
+    selectGameTemplate(gameTemplate: GameTemplate) {
+        this.event.next(gameTemplate)
+    }
+
+    yesIsLoading() {
+        return this.loadingService.yesIsLoading()
     }
 }

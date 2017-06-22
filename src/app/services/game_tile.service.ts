@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core'
-import { Http, RequestOptions, URLSearchParams, Headers } from '@angular/http'
+import { Injectable, Inject } from '@angular/core'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise'
@@ -7,28 +6,20 @@ import { Observable } from 'rxjs/Observable'
 
 import { config } from 'app/config'
 import { Game, GameTile } from 'app/models'
+import { HttpService } from 'app/services'
 
 @Injectable()
 export class GameTileService {
 
-    private httpOptions: RequestOptions
-
     constructor(
-        private http: Http
-    ) {
-        this.httpOptions = new RequestOptions({
-            headers: new Headers({
-                'x-username': config.USER,
-                'x-token': config.TOKEN
-            })
-        })
-    }
+        @Inject(HttpService) private http: HttpService
+    ) { }
 
     findById(gameId: string, matchedOrUnmatched: boolean = false): Observable<GameTile[]> {
         const queryParameters = new URLSearchParams()
         queryParameters.append('matched', matchedOrUnmatched.toString())
 
-        const options = this.httpOptions
+        const options = Object.assign(this.http.getRequestOptions())
         options.search = queryParameters
 
         return this.http.get(config.BASE_URL + 'games/' + gameId + '/tiles', options)
@@ -57,14 +48,14 @@ export class GameTileService {
         return this.http.put(config.BASE_URL + 'games/' + game._id + '/tiles', {
             tile1Id: thisTile._id,
             tile2Id: thatTile._id
-        }, this.httpOptions)
+        }, this.http.getRequestOptions())
             .map(response => {
                 return response.json()
             })
     }
 
     findMatches(game: Game): Observable<GameTile[]> {
-        return this.http.get(config.BASE_URL + '/games/' + game._id + '/tiles/matches', this.httpOptions)
+        return this.http.get(config.BASE_URL + '/games/' + game._id + '/tiles/matches', this.http.getRequestOptions())
             .map(response => {
                 response = response.json()
 

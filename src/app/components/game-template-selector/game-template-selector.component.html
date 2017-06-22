@@ -1,11 +1,19 @@
 <div class='modal' [ngClass]="{'is-active': visibility}">
     <div class='modal-background'></div>
     <div class='modal-content'>
-        <app-loading></app-loading>
 
-        <div class='box is-full-width' *ngFor='let gameTemplate of gameTemplates' (click)='selectGameTemplate(gameTemplate)'>
-            <app-game-tile *ngFor='let gameTile of gameTemplate.tiles' [gameTile]='gameTile'></app-game-tile>
+        <div class='box'>
+
+            <app-loading></app-loading>
+
+            <div class='columns'>
+                <div class='column' *ngFor='let gameTemplate of gameTemplates' (click)='selectGameTemplate(gameTemplate)'>
+                    <a class='button is-large is-full-width'>{{ gameTemplate._id }}</a>
+                </div>
+            </div>
+
         </div>
     </div>
+
     <button class='modal-close' (click)='toggle()'></button>
 </div>

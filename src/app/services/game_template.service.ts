@@ -1,31 +1,22 @@
-import { Injectable } from '@angular/core'
-import { Http, RequestOptions, Headers } from '@angular/http'
+import { Injectable, Inject } from '@angular/core'
 import { config } from 'app/config'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise'
 import { Observable } from 'rxjs/Observable'
 
+import { HttpService } from 'app/services'
 import { Game, GameTile, GameTemplate } from 'app/models'
 
 @Injectable()
 export class GameTemplateService {
 
-    private httpOptions: RequestOptions
-
     constructor(
-        private http: Http
-    ) {
-        this.httpOptions = new RequestOptions({
-            headers: new Headers({
-                'x-username': config.USER,
-                'x-token': config.TOKEN
-            })
-        })
-    }
+        @Inject(HttpService) private http: HttpService
+    ) { }
 
     findAll() {
-        return this.http.get(config.BASE_URL + 'gameTemplates', this.httpOptions)
+        return this.http.get(config.BASE_URL + 'gameTemplates', this.http.getRequestOptions())
             .map((response) => {
                 response = response.json()
 
@@ -44,7 +35,7 @@ export class GameTemplateService {
     }
 
     find(gameTemplateId: string) {
-        return this.http.get(config.BASE_URL + 'gameTemplates/' + gameTemplateId, this.httpOptions)
+        return this.http.get(config.BASE_URL + 'gameTemplates/' + gameTemplateId, this.http.getRequestOptions())
             .map((response) => {
                 return new GameTemplate(response.json())
             })

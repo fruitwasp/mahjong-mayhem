@@ -1,5 +1,5 @@
 
-import { Player, GameTemplate } from './'
+import { Player, GameTemplate, User } from './'
 
 export class Game {
 
@@ -48,13 +48,19 @@ export class Game {
         return !this.hasState('open')
     }
 
-    canJoin() {
+    canJoin(user: User) {
         if (!this.hasState('open')) {
             return false
         }
 
         if (this.players.length >= this.maxPlayers) {
             return false
+        }
+
+        for (const player of this.players) {
+            if (player.name === user.username) {
+                return false
+            }
         }
 
         return true

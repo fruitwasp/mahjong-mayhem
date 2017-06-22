@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router'
-import { GameBoardComponent, GameListComponent, GameTileComponent } from './components'
+import { GameBoardComponent, GameListComponent, GameTileComponent, LoginComponent } from './components'
 
 export const routes: Routes = [
     {
@@ -8,6 +8,12 @@ export const routes: Routes = [
             {
                 path: 'list',
                 component: GameListComponent,
+                children: [
+                    {
+                        path: ':gameState',
+                        component: GameListComponent
+                    }
+                ]
             },
             {
                 path: ':gameId',
@@ -19,5 +25,9 @@ export const routes: Routes = [
                 ]
             }
         ]
+    },
+    {
+        path: 'login-callback',
+        component: LoginComponent
     }
 ]

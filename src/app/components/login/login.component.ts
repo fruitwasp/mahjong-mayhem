@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { config } from 'app/config'
-import { LocalLoginService } from 'app/services'
+import { LocalLoginService, HttpService } from 'app/services'
 
-@Component({})
+@Component({
+    template: '<div></div>'
+})
 export class LoginComponent implements OnInit {
 
     constructor(
@@ -15,11 +17,6 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         const username = this.route.queryParams['username']
-
-        if (!username) {
-            this.router.navigateByUrl(config.LOGIN_URL)
-        }
-
         const token = this.route.queryParams['token']
 
         this.localLoginService.login(username, token)

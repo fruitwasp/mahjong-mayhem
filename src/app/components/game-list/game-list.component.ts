@@ -1,9 +1,9 @@
-import { Component, OnInit, Directive, Input } from '@angular/core'
+import { Component, OnInit, Directive, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { config } from 'app/config'
-import { Game } from 'app/models'
-import { GameService, PlayerService, LoadingService } from 'app/services'
+import { Game, GameTemplate } from 'app/models'
+import { GameService, PlayerService, LoadingService, LocalLoginService } from 'app/services'
 import { GameFilterPipe } from 'app/pipes'
 
 @Component({
@@ -16,6 +16,9 @@ import { GameFilterPipe } from 'app/pipes'
     ]
 })
 export class GameListComponent implements OnInit {
+
+    @ViewChild('gameTemplateSelector')
+    public gameTemplateSelector
 
     public games: Array<Game>
     public selectedGameState: string = 'open'
@@ -30,22 +33,31 @@ export class GameListComponent implements OnInit {
         public gameService: GameService,
         public playerService: PlayerService,
         public loadingService: LoadingService,
+        public localLoginService: LocalLoginService,
         public router: Router
     ) { }
 
     ngOnInit() {
+        this.localLoginService.checkAuthenticated()
+
         this.page(this.pageIndex, this.pageSize)
     }
 
-    preCreate() {
-
+    selectGameTemplate(gameTemplate: GameTemplate) {
+        this.create(gameTemplate)
     }
 
-    create() {
+    create(gameTemplate: GameTemplate) {
         this.loadingService.push()
 
-        this.gameService.create({})
-            .subscribe(this.loadingService.pop)
+        this.gameService.create({
+            templateName: gameTemplate._id
+        }).subscribe((game) => {
+            this.page(this.pageIndex, this.pageSize)
+
+            this.gameTemplateSelector.toggle()
+            this.loadingService.pop()
+        })
     }
 
     view(game: Game) {
@@ -110,5 +122,15 @@ export class GameListComponent implements OnInit {
 
     gamesCount() {
         return this.games && this.games.length || 0
+    }
+
+    yesIsLoading() {
+        return this.loadingService.yesIsLoading()
+    }
+
+    canJoinGame(game: Game) {
+        const user = this.localLoginService.getUser()
+
+        return game.canJoin(user)
     }
 }

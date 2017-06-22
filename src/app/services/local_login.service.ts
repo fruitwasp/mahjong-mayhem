@@ -1,20 +1,36 @@
-import { Http } from '@angular/http'
+import { Injectable, Inject } from '@angular/core'
+import { Router } from '@angular/router'
 
+import { config } from 'app/config'
 import { User } from 'app/models'
+import { HttpService } from 'app/services'
 
+@Injectable()
 export class LocalLoginService {
 
-    public user: User
+    private user: User
+
+    constructor(
+        @Inject(Router) public router: Router
+    ) { }
 
     login(username: string, token: string) {
         this.user = new User(username, token)
+
+        return this.user
     }
 
-    userIsAuthenticated() {
-        return this.user !== null
+    userIsAuthenticated(): boolean {
+        return this.user !== undefined
     }
 
     getUser(): User {
         return this.user
+    }
+
+    checkAuthenticated() {
+        if (!this.userIsAuthenticated()) {
+            window.location.href = config.LOGIN_URL + '?callbackUrl=' + document.baseURI + '/login-callback'
+        }
     }
 }
