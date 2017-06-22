@@ -29,7 +29,7 @@ export class LocalLoginService {
 
     checkAuthenticated() {
         if (!this.userIsAuthenticated()) {
-            window.location.href = config.LOGIN_URL + '?callbackUrl=' + document.baseURI + '/login-callback'
+            window.location.href = config.LOGIN_URL + '?callbackUrl=' + document.baseURI + 'login-callback'
         }
     }
 }
