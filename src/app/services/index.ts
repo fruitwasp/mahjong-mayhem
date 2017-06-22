@@ -1,5 +1,5 @@
 export * from './local_login.service'
-export * from './http.service'
+export * from './better_http.service'
 export * from './game.service'
 export * from './player.service'
 export * from './game_tile.service'

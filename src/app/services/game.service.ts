@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core'
+import { RequestOptions, URLSearchParams } from '@angular/http'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise'
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs/Observable'
 
 import { config } from 'app/config'
 import { Game } from 'app/models'
-import { HttpService } from 'app/services'
+import { BetterHttpService } from 'app/services'
 
 @Injectable()
 export class GameService {
@@ -14,11 +15,11 @@ export class GameService {
     public currentGame: Game
 
     constructor(
-        @Inject(HttpService) private http: HttpService
+        @Inject(BetterHttpService) private http: BetterHttpService
     ) { }
 
     find(gameId: number): Observable<Game> {
-        return this.http.get(config.BASE_URL + 'games/' + gameId, this.http.getRequestOptions())
+        return this.http.get(config.BASE_URL + 'games/' + gameId)
             .map((response) => {
                 return new Game(response.json())
             })
@@ -30,8 +31,9 @@ export class GameService {
         queryParameters.append('pageIndex', pageIndex.toString())
         queryParameters.append('state', gameState)
 
-        const options = Object.assign(this.http.getRequestOptions())
-        options.search = queryParameters
+        const options = new RequestOptions({
+            search: queryParameters
+        })
 
         return this.http.get(config.BASE_URL + 'games', options)
             .map((response) => {
@@ -50,7 +52,7 @@ export class GameService {
         gameData.minPlayers = gameData.minPlayers || 2
         gameData.maxPlayers = gameData.maxPlayers || 32
 
-        return this.http.post(config.BASE_URL + 'games', gameData, this.http.getRequestOptions())
+        return this.http.post(config.BASE_URL + 'games', gameData)
             .map(response => {
                 return new Game(response.json())
             })

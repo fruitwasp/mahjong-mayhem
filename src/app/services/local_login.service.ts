@@ -3,7 +3,6 @@ import { Router } from '@angular/router'
 
 import { config } from 'app/config'
 import { User } from 'app/models'
-import { HttpService } from 'app/services'
 
 @Injectable()
 export class LocalLoginService {

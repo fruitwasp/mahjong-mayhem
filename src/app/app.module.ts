@@ -14,7 +14,7 @@ import {
     LocalGameplayService,
     LoadingService,
     LocalLoginService,
-    HttpService
+    BetterHttpService
 } from './services'
 import { GameFilterPipe, GamePlayerFilterPipe } from './pipes'
 import {
@@ -56,7 +56,7 @@ import { routes } from './app.routes'
     exports: [],
     providers: [
         LocalLoginService,
-        HttpService,
+        BetterHttpService,
         GameService,
         GameTemplateService,
         GameTileService,

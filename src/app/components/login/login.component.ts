@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { config } from 'app/config'
-import { LocalLoginService, HttpService } from 'app/services'
+import { LocalLoginService } from 'app/services'
 
 @Component({
     template: '<div></div>'

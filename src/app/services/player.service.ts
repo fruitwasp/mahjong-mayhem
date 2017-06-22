@@ -6,13 +6,13 @@ import { Observable } from 'rxjs/Observable'
 
 import { config } from 'app/config'
 import { Game } from 'app/models'
-import { HttpService } from 'app/services'
+import { BetterHttpService } from 'app/services'
 
 @Injectable()
 export class PlayerService {
 
     constructor(
-        @Inject(HttpService) private http: HttpService
+        @Inject(BetterHttpService) private http: BetterHttpService
     ) { }
 
     join(game: Game) {
@@ -21,7 +21,7 @@ export class PlayerService {
             return
         }
 
-        return this.http.post(config.BASE_URL + 'games/' + game._id + '/players', {}, this.http.getRequestOptions())
+        return this.http.post(config.BASE_URL + 'games/' + game._id + '/players', {})
             .map(function(response) {
                 return response.json()
             })
@@ -33,7 +33,7 @@ export class PlayerService {
             return
         }
 
-        return this.http.delete(config.BASE_URL + 'games/' + game._id + '/players', this.http.getRequestOptions())
+        return this.http.delete(config.BASE_URL + 'games/' + game._id + '/players')
             .map(function(response) {
                 return response.json()
             })
