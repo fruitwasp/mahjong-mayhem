@@ -14,11 +14,21 @@
                 <label class='label'>Spelstatus</label>
                 <p class='control'>
                     <span class='select'>
-                    <select placeholder='Spelstatus' (change)='onSelectedGameStateChanged($event.target.value)'>
-                        <option *ngFor='let state of config.GAME_STATES'>{{ state }}</option>
-                    </select>
-                </span>
+                        <select placeholder='Spelstatus' (change)='onSelectedGameStateChanged($event.target.value)'>
+                            <option *ngFor='let state of config.GAME_STATES'>{{ state }}</option>
+                        </select>
+                    </span>
                 </p>
+
+                <label class='label'>Speler</label>
+                <p class='control'>
+                    <span class='select'>
+                        <select placeholder='Speler' (change)='onSelectedPlayerChanged($event.target.value)'>
+                            <option *ngFor='let player of players'>{{ player }}</option>
+                        </select>
+                    </span>
+                </p>
+
             </div>
 
             <div class='column'>
@@ -69,4 +79,4 @@
     </div>
 </section>
 
-<app-game-template-selector #gameTemplateSelector (event)='selectGameTemplate($event)'></app-game-template-selector>
+<app-game-template-selector #gameTemplateSelector (event)='create($event)'></app-game-template-selector>

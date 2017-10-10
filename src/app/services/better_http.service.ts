@@ -35,8 +35,8 @@ export class BetterHttpService {
             options.headers = new Headers({})
         }
 
-        options.headers.append('x-username', 'JWT ' + user.username)
-        options.headers.append('x-token', user.token)
+        options.headers.set('x-username', user.username)
+        options.headers.set('x-token', user.token)
 
         return options
     }

@@ -15,13 +15,15 @@ export class GamePlayerFilterPipe implements PipeTransform {
             }
 
             return value.filter((item) => {
+                console.log(item)
+
                 for (const player of item.players) {
                     if (player._id === input) {
                         return true
                     }
-
-                    return false
                 }
+
+                return false
             })
         }
 

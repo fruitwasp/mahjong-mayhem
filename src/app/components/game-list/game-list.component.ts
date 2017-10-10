@@ -22,7 +22,9 @@ export class GameListComponent implements OnInit {
 
     public games: Array<Game>
     public selectedGameState: string = 'open'
-    public selectedGamePlayer: string
+
+    public players: Array<string>
+    public selectedPlayer: string
 
     public config = config
 
@@ -41,10 +43,6 @@ export class GameListComponent implements OnInit {
         this.localLoginService.checkAuthenticated()
 
         this.page(this.pageIndex, this.pageSize)
-    }
-
-    selectGameTemplate(gameTemplate: GameTemplate) {
-        this.create(gameTemplate)
     }
 
     create(gameTemplate: GameTemplate) {
@@ -81,6 +79,8 @@ export class GameListComponent implements OnInit {
         this.gameService.findPaged(pageIndex, pageSize, this.selectedGameState)
             .subscribe((games) => {
                 this.games = games
+
+                this.buildPlayers(games)
 
                 this.loadingService.pop()
             })
@@ -120,6 +120,10 @@ export class GameListComponent implements OnInit {
         this.page(this.pageIndex, this.pageSize)
     }
 
+    onSelectedPlayerChanged(player: string) {
+        this.selectedPlayer = player
+    }
+
     gamesCount() {
         return this.games && this.games.length || 0
     }
@@ -132,5 +136,21 @@ export class GameListComponent implements OnInit {
         const user = this.localLoginService.getUser()
 
         return game.canJoin(user)
+    }
+
+    buildPlayers(games: Array<Game>) {
+        this.players = [
+            config.GAME_PLAYER_FILTERS.NO_GAME_PLAYER
+        ]
+
+        for (const game of games) {
+            for (const player of game.players) {
+                if (this.players.indexOf(player._id) < 0) {
+                    this.players.push(player._id)
+                }
+            }
+        }
+
+        return this.players
     }
 }

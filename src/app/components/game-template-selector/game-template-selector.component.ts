@@ -14,6 +14,7 @@ export class GameTemplateSelectorComponent implements OnInit {
 
     public gameTemplates: Array<GameTemplate>
     public visibility: boolean = false
+    public selectedGameTemplate: GameTemplate
 
     @Output()
     public event = new EventEmitter()
@@ -39,7 +40,11 @@ export class GameTemplateSelectorComponent implements OnInit {
     }
 
     selectGameTemplate(gameTemplate: GameTemplate) {
-        this.event.next(gameTemplate)
+        this.selectedGameTemplate = gameTemplate
+    }
+
+    create() {
+        this.event.next(this.selectedGameTemplate)
     }
 
     yesIsLoading() {

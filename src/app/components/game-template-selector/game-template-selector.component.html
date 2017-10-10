@@ -1,18 +1,24 @@
 <div class='modal' [ngClass]="{'is-active': visibility}">
     <div class='modal-background'></div>
-    <div class='modal-content'>
+    <div class='modal-card'>
 
-        <div class='box'>
+        <header class="modal-card-head">
+            <p class="modal-card-title">Kies een template</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
 
-            <app-loading></app-loading>
-
+        <section class="modal-card-body">
             <div class='columns'>
                 <div class='column' *ngFor='let gameTemplate of gameTemplates' (click)='selectGameTemplate(gameTemplate)'>
-                    <a class='button is-large is-full-width'>{{ gameTemplate._id }}</a>
+                    <a class='button is-primary is-large is-full-width' [ngClass]="{'is-active': gameTemplate == selectedGameTemplate}">{{ gameTemplate._id }}</a>
                 </div>
             </div>
+        </section>
 
-        </div>
+        <footer class="modal-card-foot">
+            <button class="button is-success" (click)='create()'>Aanmaken</button>
+            <button class="button">Sluiten</button>
+        </footer>
     </div>
 
     <button class='modal-close' (click)='toggle()'></button>

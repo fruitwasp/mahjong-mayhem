@@ -9,6 +9,8 @@ import { LocalLoginService } from 'app/services'
 })
 export class LoginComponent implements OnInit {
 
+    private subscription
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -16,10 +18,13 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const username = this.route.queryParams['username']
-        const token = this.route.queryParams['token']
+        this.subscription = this.route.queryParams.subscribe(params => {
+            this.localLoginService.login(params['username'], params['token'])
+            this.router.navigate(['games', 'list'])
+        })
+    }
 
-        this.localLoginService.login(username, token)
-        this.router.navigate(['games', 'list'])
+    ngOnDestroy() {
+        this.subscription.unsubscribe()
     }
 }
