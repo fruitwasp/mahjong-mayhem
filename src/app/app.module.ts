@@ -14,7 +14,8 @@ import {
     LocalGameplayService,
     LoadingService,
     LocalLoginService,
-    BetterHttpService
+    BetterHttpService,
+    GameStateService
 } from './services'
 import { GameFilterPipe, GamePlayerFilterPipe } from './pipes'
 import {
@@ -62,8 +63,8 @@ import { routes } from './app.routes'
         GameTileService,
         PlayerService,
         LocalGameplayService,
-        LoadingService
-
+        LoadingService,
+        GameStateService
     ],
     bootstrap: [AppComponent]
 })

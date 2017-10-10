@@ -38,6 +38,8 @@ export class GameTileService {
                     tiles.push(new GameTile(response[i]))
                 }
 
+                console.log(tiles)
+
                 return tiles
             })
     }
@@ -56,7 +58,7 @@ export class GameTileService {
     }
 
     findMatches(game: Game): Observable<GameTile[]> {
-        return this.http.get(config.BASE_URL + '/games/' + game._id + '/tiles/matches')
+        return this.http.get(config.BASE_URL + 'games/' + game._id + '/tiles/matches')
             .map(response => {
                 response = response.json()
 

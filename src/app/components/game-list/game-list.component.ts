@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 
 import { config } from 'app/config'
 import { Game, GameTemplate } from 'app/models'
-import { GameService, PlayerService, LoadingService, LocalLoginService } from 'app/services'
+import { GameService, PlayerService, LoadingService, LocalLoginService, GameStateService } from 'app/services'
 import { GameFilterPipe } from 'app/pipes'
 
 @Component({
@@ -36,6 +36,7 @@ export class GameListComponent implements OnInit {
         public playerService: PlayerService,
         public loadingService: LoadingService,
         public localLoginService: LocalLoginService,
+        public gameStateService: GameStateService,
         public router: Router
     ) { }
 

@@ -14,6 +14,9 @@ export class GameBoardComponent implements OnInit {
     public gameTemplate: GameTemplate
     public gameTiles: Array<GameTile>
 
+    public unmatchedTiles: Array<GameTile>
+    public matchedTiles: Array<GameTile>
+
     constructor(
         public gameService: GameService,
         public gameTileService: GameTileService,
@@ -27,13 +30,13 @@ export class GameBoardComponent implements OnInit {
             .subscribe((game) => {
                 this.game = game
                 this.localGameplayService.selectedGame = game
-            })
 
-        gameTileService.findById(gameId)
-            .subscribe((gameTiles) => {
-                this.gameTiles = gameTiles
+                gameTileService.find(game)
+                    .subscribe((gameTiles) => {
+                        this.unmatchedTiles = gameTiles
 
-                this.linkGameTiles(gameTiles)
+                        this.linkGameTiles(gameTiles)
+                    })
             })
     }
 
