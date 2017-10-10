@@ -58,7 +58,7 @@ export class Game {
         }
 
         for (const player of this.players) {
-            if (player.name === user.username) {
+            if (player._id === user.username) {
                 return false
             }
         }
