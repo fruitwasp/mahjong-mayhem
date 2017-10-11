@@ -1,5 +1,7 @@
 <app-navigation></app-navigation>
 
 <div class='container'>
+    <div class="notification is-warning" *ngFor='let notification of getNotifications()'></div>
+
     <router-outlet></router-outlet>
 </div>

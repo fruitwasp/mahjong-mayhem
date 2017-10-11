@@ -61,16 +61,18 @@ export class GameListComponent implements OnInit {
         this.selectedGameTemplate = gameTemplate
     }
 
-    create_step3(gameTemplate: GameTemplate, minPlayers: number, maxPlayers: number) {
+    create_step3(gameData: any) {
         this.gamePlayerCountSelector.hide()
         this.loadingService.push()
 
         this.gameService.create({
-            templateName: gameTemplate._id
+            templateName: this.selectedGameTemplate._id,
+            minPlayers: gameData.minPlayers,
+            maxPlayers: gameData.maxPlayers
         }).subscribe((game) => {
-            this.page(this.pageIndex, this.pageSize)
-
             this.loadingService.pop()
+
+            this.view(game)
         })
     }
 
@@ -159,6 +161,22 @@ export class GameListComponent implements OnInit {
         const user = this.localLoginService.getUser()
 
         return game.canJoin(user)
+    }
+
+    canStartGame(game: Game) {
+        const user = this.localLoginService.getUser()
+
+        return game.canStart(user)
+    }
+
+    start(game: Game) {
+        this.loadingService.push()
+
+        this.gameService.start(game)
+            .subscribe((started) => {
+                this.loadingService.pop()
+                this.page(this.pageIndex, this.pageSize)
+            })
     }
 
     buildPlayers(games: Array<Game>) {

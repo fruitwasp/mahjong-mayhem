@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
 import { Game, GameTemplate, GameTile } from 'app/models'
-import { GameService, GameTileService, GameTemplateService, LocalGameplayService } from 'app/services'
+import { GameService, GameTileService, GameTemplateService, LocalGameplayService, NotificationManager } from 'app/services'
 
 @Component({
     selector: 'app-game-board',
@@ -39,4 +39,10 @@ export class GameBoardComponent implements OnInit {
     }
 
     ngOnInit() { }
+
+    markTile(gameTile: GameTile) {
+        console.log(gameTile)
+
+        this.localGameplayService.markGameTile(gameTile)
+    }
 }

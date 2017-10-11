@@ -69,4 +69,12 @@ export class Game {
     playerCount() {
         return this.players.length
     }
+
+    canStart(user: User) {
+        if (this.playerCount() <= this.minPlayers) {
+            return false
+        }
+
+        return this.createdBy._id === user.username
+    }
 }

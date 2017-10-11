@@ -38,8 +38,6 @@ export class GameTileService {
                     tiles.push(new GameTile(response[i]))
                 }
 
-                console.log(tiles)
-
                 return tiles
             })
     }

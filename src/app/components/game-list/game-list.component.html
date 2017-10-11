@@ -12,6 +12,8 @@
                     <a class="button is-primary is-fullwidth" (click)='refresh()' [ngClass]="{'is-loading': yesIsLoading()}">Verversen</a>
                 </p>
 
+                <br/>
+
                 <p class='control'>
                     <a class='button is-primary is-fullwidth' (click)='create_step1()'>Aanmaken</a>
                 </p>
@@ -49,7 +51,7 @@
                                 <p>
                                     <strong>{{ game.gameTemplate }}</strong>
                                     <small>{{ game._id }}</small>
-                                    <small style='float: right;'>{{ game.playerCount() }} / {{ game.maxPlayers }} spelers</small>
+                                    <small style='float: right;'>{{ game.playerCount() }} ({{ game.minPlayers }}) / {{ game.maxPlayers }} spelers</small>
                                     <br>
                                     <small style='float: right;'>{{ game.state }}</small>
                                 </p>
@@ -64,6 +66,7 @@
                             <footer>
                                 <button class='button is-primary' (click)='view(game)' [disabled]='!game.canView()'>Weergeven</button>
                                 <button class='button is-success' (click)='join(game)' [disabled]='!canJoinGame(game)'>Deelnemen</button>
+                                <button class='button is-info' (click)='start(game)' [disabled]='!canStartGame(game)'>Starten</button>
                             </footer>
 
                         </div>

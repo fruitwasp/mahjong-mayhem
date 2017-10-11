@@ -1,4 +1,4 @@
-import { Component, Input, style } from '@angular/core'
+import { Component, Input, Output, EventEmitter, style } from '@angular/core'
 import { GameTile, Game } from 'app/models'
 import { LocalGameplayService } from 'app/services'
 
@@ -11,13 +11,14 @@ export class GameTileComponent {
     @Input()
     public gameTile: GameTile
 
+    @Output()
+    public event: EventEmitter<GameTile>
+
     constructor(
         public localGameplayService: LocalGameplayService
     ) { }
 
     mark() {
-        console.log(this.gameTile)
-
-        this.localGameplayService.markGameTile(this.gameTile)
+        this.event.next(this.gameTile)
     }
 }

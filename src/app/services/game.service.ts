@@ -50,11 +50,18 @@ export class GameService {
     create(gameData: any): Observable<Game> {
         gameData.templateName = gameData.templateName || 'Shanghai'
         gameData.minPlayers = gameData.minPlayers || 2
-        gameData.maxPlayers = gameData.maxPlayers || 32
+        gameData.maxPlayers = gameData.maxPlayers || config.MAX_PLAYERS
 
         return this.http.post(config.BASE_URL + 'games', gameData)
             .map(response => {
                 return new Game(response.json())
+            })
+    }
+
+    start(game: Game): Observable<boolean> {
+        return this.http.post(config.BASE_URL + 'games/' + game._id + '/start', {})
+            .map(response => {
+                return response.status === 200
             })
     }
 }

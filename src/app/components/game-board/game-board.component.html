@@ -18,7 +18,7 @@
         </div>
 
         <div class='column' *ngIf='unmatchedTiles'>
-            <app-game-tile *ngFor='let gameTile of unmatchedTiles' [gameTile]='gameTile' style='position:relative'></app-game-tile>
+            <app-game-tile *ngFor='let gameTile of unmatchedTiles' [gameTile]='gameTile' style='position:relative' (event)='markTile($event)'></app-game-tile>
         </div>
     </div>
 </section>
