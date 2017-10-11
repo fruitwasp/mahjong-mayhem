@@ -15,7 +15,6 @@ export class GameBoardComponent implements OnInit {
     public gameTiles: Array<GameTile>
 
     public unmatchedTiles: Array<GameTile>
-    public matchedTiles: Array<GameTile>
 
     constructor(
         public gameService: GameService,
@@ -25,6 +24,8 @@ export class GameBoardComponent implements OnInit {
         public localGameplayService: LocalGameplayService
     ) {
         const gameId = route.snapshot.params.gameId
+
+        this.unmatchedTiles = []
 
         gameService.find(gameId)
             .subscribe((game) => {

@@ -14,10 +14,6 @@ export class GameTileComponent {
     @Output()
     public event: EventEmitter<GameTile>
 
-    constructor(
-        public localGameplayService: LocalGameplayService
-    ) { }
-
     mark() {
         this.event.next(this.gameTile)
     }

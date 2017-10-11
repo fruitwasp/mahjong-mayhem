@@ -22,7 +22,7 @@ export class NotificationManager {
     }
 
     processHttpResponse(response) {
-        if (response.statusCode === 401) {
+        if (response.status === 401) {
             this.push({
                 message: response.message,
                 id: this.notifications.length
