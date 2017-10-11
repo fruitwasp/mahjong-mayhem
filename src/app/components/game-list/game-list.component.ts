@@ -19,6 +19,10 @@ export class GameListComponent implements OnInit {
 
     @ViewChild('gameTemplateSelector')
     public gameTemplateSelector
+    public selectedGameTemplate: GameTemplate
+
+    @ViewChild('gamePlayerCountSelector')
+    public gamePlayerCountSelector
 
     public games: Array<Game>
     public selectedGameState: string = 'open'
@@ -46,7 +50,19 @@ export class GameListComponent implements OnInit {
         this.page(this.pageIndex, this.pageSize)
     }
 
-    create(gameTemplate: GameTemplate) {
+    create_step1() {
+        this.gameTemplateSelector.show()
+    }
+
+    create_step2(gameTemplate: GameTemplate) {
+        this.gameTemplateSelector.hide()
+        this.gamePlayerCountSelector.show()
+
+        this.selectedGameTemplate = gameTemplate
+    }
+
+    create_step3(gameTemplate: GameTemplate, minPlayers: number, maxPlayers: number) {
+        this.gamePlayerCountSelector.hide()
         this.loadingService.push()
 
         this.gameService.create({
@@ -54,7 +70,6 @@ export class GameListComponent implements OnInit {
         }).subscribe((game) => {
             this.page(this.pageIndex, this.pageSize)
 
-            this.gameTemplateSelector.toggle()
             this.loadingService.pop()
         })
     }

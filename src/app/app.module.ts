@@ -23,6 +23,7 @@ import {
     GameListComponent,
     GameTileComponent,
     NavigationComponent,
+    GamePlayerCountSelectorComponent,
     GameTemplateSelectorComponent,
     LoadingComponent,
     LoginComponent
@@ -42,6 +43,7 @@ import { routes } from './app.routes'
         GameListComponent,
         GameTileComponent,
         NavigationComponent,
+        GamePlayerCountSelectorComponent,
         GameTemplateSelectorComponent,
         LoadingComponent,
         LoginComponent

@@ -39,11 +39,19 @@ export class GameTemplateSelectorComponent implements OnInit {
         this.visibility = !this.visibility
     }
 
+    hide() {
+        this.visibility = false
+    }
+
+    show() {
+        this.visibility = true
+    }
+
     selectGameTemplate(gameTemplate: GameTemplate) {
         this.selectedGameTemplate = gameTemplate
     }
 
-    create() {
+    next() {
         this.event.next(this.selectedGameTemplate)
     }
 

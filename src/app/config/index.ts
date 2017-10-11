@@ -21,5 +21,8 @@ export const config = {
     LOGIN_URL: 'https://mahjongmayhem.herokuapp.com/auth/avans',
     GAME_PLAYER_FILTERS: {
         NO_GAME_PLAYER: '<selecteer speler>'
-    }
+    },
+
+    MIN_PLAYERS: 2,
+    MAX_PLAYERS: 32
 }

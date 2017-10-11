@@ -1,0 +1,37 @@
+<div class='modal' [ngClass]="{'is-active': visibility}">
+    <div class='modal-background'></div>
+    <div class='modal-card'>
+
+        <header class="modal-card-head">
+            <p class="modal-card-title">Selecteer het aantal spelers</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+
+        <section class="modal-card-body">
+            <div class='columns'>
+                <div class='column'>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-primary" type="text" [(ngModel)]='selectedMinPlayers' placeholder="Minimaal aantal spelers" min='selectedMinPlayers' max='selectedMaxPlayers'>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='column'>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-primary" type="text" [(ngModel)]='selectedMaxPlayers' placeholder="Maximaal aantal spelers" min='selectedMinPlayers' max='selectedMaxPlayers'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="modal-card-foot">
+            <button class="button is-success" (click)='next()'>Aanmaken</button>
+            <button class="button">Sluiten</button>
+        </footer>
+    </div>
+
+    <button class='modal-close' (click)='toggle()'></button>
+</div>

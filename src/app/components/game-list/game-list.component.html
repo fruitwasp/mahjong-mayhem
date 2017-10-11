@@ -8,7 +8,7 @@
             <div class='column field is-2'>
                 <label class='label'>Acties</label>
                 <p class='control'>
-                    <a class='button is-primary is-fullwidth' (click)='gameTemplateSelector.toggle()'>Aanmaken</a>
+                    <a class='button is-primary is-fullwidth' (click)='create_step1()'>Aanmaken</a>
                 </p>
 
                 <label class='label'>Spelstatus</label>
@@ -79,4 +79,5 @@
     </div>
 </section>
 
-<app-game-template-selector #gameTemplateSelector (event)='create($event)'></app-game-template-selector>
+<app-game-template-selector #gameTemplateSelector (event)='create_step2($event)'></app-game-template-selector>
+<app-game-player-count-selector #gamePlayerCountSelector (event)='create_step3($event)'></app-game-player-count-selector>
