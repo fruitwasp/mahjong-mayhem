@@ -4,7 +4,7 @@ import { LocalGameplayService } from 'app/services'
 
 @Component({
     selector: 'app-game-tile',
-    template: `<div [ngStyle]="gameTile.getStyle()" (click)="mark()"></div>`
+    templateUrl: './game-tile.component.html'
 })
 export class GameTileComponent {
 

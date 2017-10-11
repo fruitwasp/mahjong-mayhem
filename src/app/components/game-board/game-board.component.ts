@@ -22,15 +22,17 @@ export class GameBoardComponent implements OnInit {
         public gameTemplateService: GameTemplateService,
         public route: ActivatedRoute,
         public localGameplayService: LocalGameplayService
-    ) {
-        const gameId = route.snapshot.params.gameId
+    ) { }
 
-        gameService.find(gameId)
+    ngOnInit() {
+        const gameId = this.route.snapshot.params.gameId
+
+        this.gameService.find(gameId)
             .subscribe((game) => {
                 this.game = game
                 this.localGameplayService.selectedGame = game
 
-                gameTileService.find(game)
+                this.gameTileService.find(game)
                     .subscribe((gameTiles) => {
                         for (const gameTile of gameTiles) {
                             if (gameTile.hasMatch()) {
@@ -43,12 +45,10 @@ export class GameBoardComponent implements OnInit {
                         game.matchedTiles.sort(function(a, b) {
                             return a.match.foundOn.localeCompare(b.match.foundOn)
                         })
-                        this.matchedTilesUntil = game.matchedTilesCount()
+                        this.matchedTilesUntil = 0
                     })
             })
-    }
-
-    ngOnInit() { }
+     }
 
     markTile(gameTile: GameTile) {
         this.localGameplayService.markGameTile(gameTile)
