@@ -79,7 +79,7 @@ export class GameListComponent implements OnInit {
     view(game: Game) {
         this.gameService.currentGame = game
 
-        this.router.navigate(['games', game._id, 'play'], game)
+        this.router.navigate(['games', game._id, 'play'])
     }
 
     join(game: Game) {
