@@ -48,6 +48,10 @@ export class GameTileService {
         return this.findById(game._id, matchedOrUnmatched)
     }
 
+    findUnmatched(game: Game): Observable<GameTile[]> {
+        return this.find(game, false)
+    }
+
     match(thisTile: GameTile, thatTile: GameTile, game: Game) {
         return this.http.put(config.BASE_URL + 'games/' + game._id + '/tiles', {
             tile1Id: thisTile._id,

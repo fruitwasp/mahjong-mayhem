@@ -23,6 +23,6 @@ export const config = {
         NO_GAME_PLAYER: '<selecteer speler>'
     },
 
-    MIN_PLAYERS: 2,
+    MIN_PLAYERS: 1,
     MAX_PLAYERS: 32
 }

@@ -88,6 +88,9 @@ export class GameListComponent implements OnInit {
     }
 
     page(pageIndex: number = 1, pageSize: number = 10) {
+        this.pageIndex = pageIndex
+        this.pageSize = pageSize
+
         this.games = []
 
         this.loadingService.push()
@@ -100,6 +103,10 @@ export class GameListComponent implements OnInit {
 
                 this.loadingService.pop()
             })
+    }
+
+    refresh() {
+        this.page(this.pageIndex, this.pageSize)
     }
 
     previousPage() {

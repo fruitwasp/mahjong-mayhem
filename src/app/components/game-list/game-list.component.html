@@ -7,6 +7,11 @@
 
             <div class='column field is-2'>
                 <label class='label'>Acties</label>
+
+                <p class='control'>
+                    <a class="button is-primary is-fullwidth" (click)='refresh()' [ngClass]="{'is-loading': yesIsLoading()}">Verversen</a>
+                </p>
+
                 <p class='control'>
                     <a class='button is-primary is-fullwidth' (click)='create_step1()'>Aanmaken</a>
                 </p>

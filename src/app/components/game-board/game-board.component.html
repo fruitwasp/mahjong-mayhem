@@ -1,8 +1,15 @@
 <section *ngIf='game'>
     <div class='columns'>
         <div class='column is-3'>
-            <h1 class="title">{{ game.gameTemplate }}</h1>
-            <h2 class="subtitle">{{ game._id }}</h2>
+
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">{{ game.gameTemplate }}</h1>
+                        <h2 class="subtitle">{{ game._id }}</h2>
+                    </div>
+                </div>
+            </section>
 
             <details open>
                 <summary>Deelnemers</summary>
@@ -10,10 +17,8 @@
             </details>
         </div>
 
-        <div class='column'>
-            <div class='box' *ngIf='gameTiles'>
-                <app-game-tile *ngFor='let gameTile of gameTiles' [gameTile]='gameTile' style='position:relative'></app-game-tile>
-            </div>
+        <div class='column' *ngIf='unmatchedTiles'>
+            <app-game-tile *ngFor='let gameTile of unmatchedTiles' [gameTile]='gameTile' style='position:relative'></app-game-tile>
         </div>
     </div>
 </section>

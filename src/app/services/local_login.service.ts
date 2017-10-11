@@ -16,6 +16,9 @@ export class LocalLoginService {
     login(username: string, token: string) {
         this.user = new User(username, token)
 
+        localStorage.setItem('username', username)
+        localStorage.setItem('token', token)
+
         return this.user
     }
 
@@ -29,6 +32,13 @@ export class LocalLoginService {
 
     checkAuthenticated() {
         if (!this.userIsAuthenticated()) {
+            const username = localStorage.getItem('username')
+            const token = localStorage.getItem('token')
+
+            if (username && token) {
+                return this.login(username, token)
+            }
+
             window.location.href = config.LOGIN_URL + '?callbackUrl=' + document.baseURI + 'login-callback'
         }
     }

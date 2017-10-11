@@ -34,15 +34,9 @@ export class GameBoardComponent implements OnInit {
                 gameTileService.find(game)
                     .subscribe((gameTiles) => {
                         this.unmatchedTiles = gameTiles
-
-                        this.linkGameTiles(gameTiles)
                     })
             })
     }
 
     ngOnInit() { }
-
-    linkGameTiles(gameTiles: Array<GameTile>) {
-
-    }
 }
