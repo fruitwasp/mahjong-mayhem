@@ -34,7 +34,7 @@ export class GameBoardComponent implements OnInit {
 
                 gameTileService.find(game, false)
                     .subscribe((gameTiles) => {
-                        game.unmatchedTiles = gameTiles
+                        //game.unmatchedTiles = gameTiles
 
                         console.log(gameTiles)
                     })
