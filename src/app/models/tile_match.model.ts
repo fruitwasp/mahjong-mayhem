@@ -5,7 +5,7 @@ export class TileMatch {
     public otherTileId: string
     public foundOn: string
 
-    constructor(json = null) {
+    constructor(json) {
         this.foundBy = json.foundBy
         this.otherTileId = json.otherTyleId
         this.foundOn = json.foundOn

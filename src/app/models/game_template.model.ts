@@ -4,7 +4,7 @@ export class GameTemplate {
     public _id: string
     public gameTiles: Array<GameTile>
 
-    constructor(json = null) {
+    constructor(json) {
         this._id = json._id
         this.gameTiles = []
 

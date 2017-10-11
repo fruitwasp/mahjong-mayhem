@@ -16,17 +16,8 @@ export class GameTileService {
         @Inject(BetterHttpService) private http: BetterHttpService
     ) { }
 
-    findById(gameId: string, matchedOrUnmatched: boolean = false): Observable<GameTile[]> {
-        const queryParameters = new URLSearchParams()
-        queryParameters.set('matched', matchedOrUnmatched.toString())
-
-        const options = new RequestOptions({
-            params: queryParameters
-        })
-
-        console.log(options.params)
-
-        return this.http.get(config.BASE_URL + 'games/' + gameId + '/tiles', options)
+    find(game: Game): Observable<GameTile[]> {
+        return this.http.get(config.BASE_URL + 'games/' + game._id + '/tiles')
             .map((response) => {
                 response = response.json()
 
@@ -42,14 +33,6 @@ export class GameTileService {
 
                 return tiles
             })
-    }
-
-    find(game: Game, matchedOrUnmatched: boolean = true): Observable<GameTile[]> {
-        return this.findById(game._id, matchedOrUnmatched)
-    }
-
-    findUnmatched(game: Game): Observable<GameTile[]> {
-        return this.find(game, false)
     }
 
     match(thisTile: GameTile, thatTile: GameTile, game: Game) {

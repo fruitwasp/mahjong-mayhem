@@ -10,7 +10,7 @@ export class GameTile {
     public _id: string
     public match: TileMatch
 
-    constructor(json = null) {
+    constructor(json) {
         this.xPos = json.xPos
         this.yPos = json.yPos
         this.zPos = json.zPos
@@ -46,5 +46,9 @@ export class GameTile {
     canMatch() {
         // TODO: position checking
         return true
+    }
+
+    hasMatch() {
+        return this.match instanceof TileMatch
     }
 }

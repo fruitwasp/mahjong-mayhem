@@ -23,36 +23,34 @@ export class GameBoardComponent implements OnInit {
         public route: ActivatedRoute,
         public localGameplayService: LocalGameplayService
     ) {
-        console.log(route); 
         const gameId = route.snapshot.params.gameId
-       
+
         gameService.find(gameId)
             .subscribe((game) => {
-                console.log(game);
                 this.game = game
                 this.localGameplayService.selectedGame = game
 
-                gameTileService.find(game, false)
+                gameTileService.find(game)
                     .subscribe((gameTiles) => {
-                        //game.unmatchedTiles = gameTiles
+                        for (const gameTile of gameTiles) {
+                            if (gameTile.hasMatch()) {
+                                game.matchedTiles.push(gameTile)
+                            } else {
+                                game.unmatchedTiles.push(gameTile)
+                            }
+                        }
 
-                        console.log(gameTiles)
-                    })
-
-                gameTileService.find(game, true)
-                    .subscribe((gameTiles) => {
-                        game.matchedTiles = gameTiles
-
+                        game.matchedTiles.sort(function(a, b) {
+                            return a.match.foundOn.localeCompare(b.match.foundOn)
+                        })
                         this.matchedTilesUntil = game.matchedTilesCount()
                     })
             })
     }
 
-     ngOnInit() { }
+    ngOnInit() { }
 
     markTile(gameTile: GameTile) {
-        console.log(gameTile)
-
         this.localGameplayService.markGameTile(gameTile)
     }
 

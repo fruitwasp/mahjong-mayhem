@@ -6,7 +6,7 @@ export class Tile {
     public name: string
     public matchesWholeSuit: boolean
 
-    constructor(json = null) {
+    constructor(json) {
         this._id = json._id
         this.suit = json.suit
         this.name = json.name
