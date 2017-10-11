@@ -23,10 +23,12 @@ export class GameBoardComponent implements OnInit {
         public route: ActivatedRoute,
         public localGameplayService: LocalGameplayService
     ) {
+        console.log(route); 
         const gameId = route.snapshot.params.gameId
-
+       
         gameService.find(gameId)
             .subscribe((game) => {
+                console.log(game);
                 this.game = game
                 this.localGameplayService.selectedGame = game
 
@@ -46,7 +48,7 @@ export class GameBoardComponent implements OnInit {
             })
     }
 
-    ngOnInit() { }
+     ngOnInit() { }
 
     markTile(gameTile: GameTile) {
         console.log(gameTile)

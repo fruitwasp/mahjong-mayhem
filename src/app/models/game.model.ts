@@ -17,7 +17,7 @@ export class Game {
     public unmatchedTiles: Array<GameTile> = []
     public matchedTiles: Array<GameTile> = []
 
-    constructor(json = null) {
+    constructor(json) {
         this._id = json._id
         this.createdBy = json.createdBy
         this.gameTemplate = new GameTemplate(json.gameTemplate)
