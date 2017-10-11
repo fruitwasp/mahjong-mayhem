@@ -18,11 +18,13 @@ export class GameTileService {
 
     findById(gameId: string, matchedOrUnmatched: boolean = false): Observable<GameTile[]> {
         const queryParameters = new URLSearchParams()
-        queryParameters.append('matched', matchedOrUnmatched.toString())
+        queryParameters.set('matched', matchedOrUnmatched.toString())
 
         const options = new RequestOptions({
-            search: queryParameters
+            params: queryParameters
         })
+
+        console.log(options.params)
 
         return this.http.get(config.BASE_URL + 'games/' + gameId + '/tiles', options)
             .map((response) => {

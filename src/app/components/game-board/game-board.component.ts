@@ -14,7 +14,7 @@ export class GameBoardComponent implements OnInit {
     public gameTemplate: GameTemplate
     public gameTiles: Array<GameTile>
 
-    public unmatchedTiles: Array<GameTile>
+    public matchedTilesUntil: number = 0
 
     constructor(
         public gameService: GameService,
@@ -25,16 +25,23 @@ export class GameBoardComponent implements OnInit {
     ) {
         const gameId = route.snapshot.params.gameId
 
-        this.unmatchedTiles = []
-
         gameService.find(gameId)
             .subscribe((game) => {
                 this.game = game
                 this.localGameplayService.selectedGame = game
 
-                gameTileService.find(game)
+                gameTileService.find(game, false)
                     .subscribe((gameTiles) => {
-                        this.unmatchedTiles = gameTiles
+                        game.unmatchedTiles = gameTiles
+
+                        console.log(gameTiles)
+                    })
+
+                gameTileService.find(game, true)
+                    .subscribe((gameTiles) => {
+                        game.matchedTiles = gameTiles
+
+                        this.matchedTilesUntil = game.matchedTilesCount()
                     })
             })
     }
@@ -45,5 +52,9 @@ export class GameBoardComponent implements OnInit {
         console.log(gameTile)
 
         this.localGameplayService.markGameTile(gameTile)
+    }
+
+    getMatchedTilesUntil(matchedTilesUntil: number) {
+        return this.game.getMatchedTilesUntil(matchedTilesUntil)
     }
 }

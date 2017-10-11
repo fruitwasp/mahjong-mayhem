@@ -43,6 +43,8 @@ export class GameService {
                     games.push(new Game(gameData))
                 }
 
+                console.log(games)
+
                 return games
             })
     }

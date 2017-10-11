@@ -2,11 +2,11 @@
     <div class='columns'>
         <div class='column is-3'>
 
-            <section class="hero">
-                <div class="hero-body">
-                    <div class="container">
-                        <h1 class="title">{{ game.gameTemplate }}</h1>
-                        <h2 class="subtitle">{{ game._id }}</h2>
+            <section class='hero'>
+                <div class='hero-body'>
+                    <div class='container'>
+                        <h1 class='title'>{{ game.gameTemplate }}</h1>
+                        <h2 class='subtitle'>{{ game._id }}</h2>
                     </div>
                 </div>
             </section>
@@ -17,8 +17,20 @@
             </details>
         </div>
 
-        <div class='column' *ngIf='unmatchedTiles'>
-            <app-game-tile *ngFor='let gameTile of unmatchedTiles' [gameTile]='gameTile' style='position:relative' (event)='markTile($event)'></app-game-tile>
+        <div class='column'>
+            <app-game-tile data-tile-type='unmatched' *ngFor='let gameTile of game.unmatchedTiles' [gameTile]='gameTile' style='position:relative' (event)='markTile($event)'></app-game-tile>
+            <app-game-tile data-tile-type='matched' *ngFor='let gameTile of game.getMatchedTilesUntil(matchedTilesUntil)' [gameTile]='gameTile' style='position:relative'></app-game-tile>
+        </div>
+    </div>
+
+    <div class='columns'>
+        <div class='column'>
+            <div class='field'>
+                <label class='label'>Tijdsverloop</label>
+                <div class='control'>
+                    <input type='range' min='0' max='{{ game.matchedTilesCount() }}' [(ngModel)]='matchedTilesUntil'>
+                </div>
+            </div>
         </div>
     </div>
 </section>

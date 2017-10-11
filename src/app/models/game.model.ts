@@ -1,5 +1,5 @@
 
-import { Player, GameTemplate, User } from './'
+import { Player, GameTemplate, User, GameTile } from './'
 
 export class Game {
 
@@ -14,6 +14,9 @@ export class Game {
     public maxPlayers: number
     public players: Player[]
 
+    public unmatchedTiles: Array<GameTile> = []
+    public matchedTiles: Array<GameTile> = []
+
     constructor(json = null) {
         this._id = json._id
         this.createdBy = json.createdBy
@@ -27,7 +30,7 @@ export class Game {
 
         this.players = []
 
-        for (let i in json.players) {
+        for (const i in json.players) {
             if (!json.players.hasOwnProperty(i)) {
                 continue
             }
@@ -76,5 +79,15 @@ export class Game {
         }
 
         return this.createdBy._id === user.username
+    }
+
+    matchedTilesCount() {
+        return this.matchedTiles.length
+    }
+
+    getMatchedTilesUntil(matchedTilesUntil: number) {
+        const matchedTiles = this.matchedTiles.slice()
+
+        return matchedTiles.splice(matchedTilesUntil, matchedTiles.length - matchedTilesUntil)
     }
 }

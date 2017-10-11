@@ -45,6 +45,8 @@ export class LocalGameplayService {
             return false
         }
 
+        console.log(this.selectedGameTiles)
+
         const thisTile = this.selectedGameTiles[0]
         const thatTile = this.selectedGameTiles[1]
 

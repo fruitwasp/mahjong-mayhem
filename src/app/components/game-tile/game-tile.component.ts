@@ -12,7 +12,7 @@ export class GameTileComponent {
     public gameTile: GameTile
 
     @Output()
-    public event: EventEmitter<GameTile>
+    public event = new EventEmitter()
 
     mark() {
         this.event.next(this.gameTile)
